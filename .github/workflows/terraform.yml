@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       backend_config:
-        default: ./main.s3.tfbackend
+        default: main.s3.tfbackend
         type: string
       working_directory:
         default: ./
@@ -30,10 +30,7 @@ jobs:
 
       - name: init
         id: init
-        run: >-
-          terraform init
-            -reconfigure
-            -backend-config="${{ inputs.backend_config }}"
+        run: terraform init -reconfigure -backend-config="${{ inputs.backend_config }}"
 
       - name: validate
         id: validate
