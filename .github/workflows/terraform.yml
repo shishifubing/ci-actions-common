@@ -68,7 +68,7 @@ jobs:
               <details><summary>Show Plan</summary>
 
               \`\`\`\n
-              ${{ steps.plan.outputs.stdout || "there is no plan" }}
+              ${{ steps.plan.outputs.stdout || 'there is no plan' }}
               \`\`\`
 
               </details>
