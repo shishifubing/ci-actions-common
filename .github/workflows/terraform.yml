@@ -14,8 +14,8 @@ on:
     secrets:
       aws_key_id:
       aws_key:
-      gitlab_token:
-      github_token:
+      token_gitlab:
+      token_github:
 
 jobs:
   terraform:
@@ -29,8 +29,8 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.aws_key_id }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_key }}
-      GITLAB_TOKEN: ${{ secrets.gitlab_token }}
-      GITHUB_TOKEN: ${{ secrets.github_token || secrets.GITHUB_TOKEN }}
+      GITLAB_TOKEN: ${{ secrets.token_gitlab }}
+      GITHUB_TOKEN: ${{ secrets.token_github || secrets.GITHUB_TOKEN }}
 
     steps:
       - name: setup env
