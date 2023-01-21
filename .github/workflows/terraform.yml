@@ -54,12 +54,12 @@ jobs:
       - name: plan
         id: plan
         if: github.event_name == 'pull_request'
+        # for some reason github cannot find the delimiter if I try to do it
+        # in one line
         run: |
-          echo -e "
-            stdout<<EOF
-            $(terraform plan -no-color -input=false)
-            EOF
-          " >>"${GITHUB_OUTPUT}"
+          echo "stdout<<EOF" >>"${GITHUB_OUTPUT}"
+          echo "$(terraform plan -no-color -input=false)" >>"${GITHUB_OUTPUT}"
+          echo "EOF" >>"${GITHUB_OUTPUT}"
         continue-on-error: true
 
       - name: pr comment
