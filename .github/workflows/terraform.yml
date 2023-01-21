@@ -6,9 +6,15 @@ on:
       backend_config:
         default: main.s3.tfbackend
         type: string
+        description: -backend-config for terraform
       working_directory:
         default: ./
         type: string
+        description: working directory for all steps
+    secrets:
+      env:
+        required: false
+        description: environment variables
 
 jobs:
   terraform:
@@ -21,6 +27,9 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
 
     steps:
+      - name: setup env
+        run: echo "${{ secrets.env }}" >>"${GITHUB_ENV}"
+
       - name: checkout
         uses: actions/checkout@v3
 
