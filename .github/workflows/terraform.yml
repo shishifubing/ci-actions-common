@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       backend_config:
-        default: main.s3.tfbackend
+        default: ./main.s3.tfbackend
         type: string
       working_directory:
         default: ./
