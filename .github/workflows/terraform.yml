@@ -33,9 +33,6 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.token_github || secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: setup env
-        run: echo "${{ secrets.env }}" >>"${GITHUB_ENV}"
-
       - name: checkout
         uses: actions/checkout@v3
 
