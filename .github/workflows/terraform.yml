@@ -48,7 +48,12 @@ jobs:
       - name: plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: echo "stdout<<EOF$(terraform plan -no-color -input=false)EOF" >>"${GITHUB_OUTPUT}"
+        run: |
+          echo "
+            stdout<<EOF
+            $(terraform plan -no-color -input=false)
+            EOF
+          " >>"${GITHUB_OUTPUT}"
         continue-on-error: true
 
       - name: pr comment
