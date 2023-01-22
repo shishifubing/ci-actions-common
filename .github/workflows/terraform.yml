@@ -12,10 +12,12 @@ on:
         type: string
         description: working directory for all steps
     secrets:
-      aws_key_id:
-      aws_key:
-      token_gitlab:
-      token_github:
+      env:
+        description: environment variables (they will be masked)
+        required: false
+      mask:
+        description: values that will be masked
+        required: false
 
 jobs:
   terraform:
@@ -26,13 +28,14 @@ jobs:
     defaults:
       run:
         working-directory: ${{ inputs.working_directory }}
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.aws_key_id }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_key }}
-      GITLAB_TOKEN: ${{ secrets.token_gitlab }}
-      GITHUB_TOKEN: ${{ secrets.token_github || secrets.GITHUB_TOKEN }}
 
     steps:
+      - name: mask values
+        run: for value in "${{ secrets.mask }}"; do echo "::add-mask::${value}"; done
+
+      - name: setup env
+        run: echo "${{ secrets.env }}" >>"${GITHUB_ENV}"
+        
       - name: checkout
         uses: actions/checkout@v3
 
@@ -51,12 +54,9 @@ jobs:
       - name: plan
         id: plan
         if: github.event_name == 'pull_request'
-        # for some reason github cannot find the delimiter if I try to do it
-        # in one line, even if I add newlines
         run: |
-          echo "stdout<<EOF" >>"${GITHUB_OUTPUT}"
-          echo "$(terraform plan -no-color -input=false)" >>"${GITHUB_OUTPUT}"
-          echo "EOF" >>"${GITHUB_OUTPUT}"
+          output=$(terraform plan -no-color -input=false)
+          echo -e "stdout<<EOF\n${output}\nEOF\n" >>"${GITHUB_OUTPUT}"
         continue-on-error: true
 
       - name: pr comment
