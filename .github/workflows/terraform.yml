@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: mask values
-        run: for value in "${{ secrets.masked }}"; do echo "::add-mask::${value}"; done
+        run: for value in "${{ secrets.mask }}"; do echo "::add-mask::${value}"; done
 
       - name: setup env
         run: echo "${{ secrets.env }}" >>"${GITHUB_ENV}"
