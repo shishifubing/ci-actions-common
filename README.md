@@ -7,8 +7,6 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
-
 Reusable github actions and workflows for [shishifubing][owner-url] repositories
 
 ### [terraform.yml]
