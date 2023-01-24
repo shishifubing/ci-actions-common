@@ -36,14 +36,6 @@ jobs:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LICENSE -->
-
-## License
-
-Distributed under the GNU Affero General Public License v3.0. See [LICENSE] for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- internal links -->
 
 [license]: ./LICENSE
