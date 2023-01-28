@@ -9,6 +9,9 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: checkout
+      uses: actions/checkout@v3
+
     - name: format
       id: fmt
       run: terraform fmt -check
