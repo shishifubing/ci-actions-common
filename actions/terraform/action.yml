@@ -1,0 +1,85 @@
+name: terraform
+description: run terraform plan on PR and run terraform apply after merge
+
+inputs:
+  working_directory:
+    default: ./
+    description: working directory for all terraform commands
+  backend_config:
+    default: main.s3.tfbackend
+    description: -backend-config for terraform
+
+runs:
+  using: composite
+  steps:
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: format
+      id: fmt
+      run: terraform fmt -check
+      shell: sh
+      working-directory: ${{ inputs.working_directory }}
+
+    - name: init
+      id: init
+      run: terraform init -reconfigure -backend-config="${{ inputs.backend_config }}"
+      shell: sh
+      working-directory: ${{ inputs.working_directory }}
+
+    - name: validate
+      id: validate
+      run: terraform validate -no-color
+      shell: sh
+      working-directory: ${{ inputs.working_directory }}
+
+    - name: plan
+      id: plan
+      if: github.event_name == 'pull_request'
+      run: |
+        output=$(terraform plan -no-color -input=false)
+        echo -e "stdout<<EOF\n${output}\nEOF\n" >>"${GITHUB_OUTPUT}"
+      continue-on-error: true
+      shell: sh
+      working-directory: ${{ inputs.working_directory }}
+
+    - name: pr comment
+      uses: actions/github-script@v6
+      if: github.event_name == 'pull_request'
+      with:
+        script: |
+          const output = `
+            #### Terraform Format and Style: \`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization: \`${{ steps.init.outcome }}\`
+            #### Terraform Validation: \`${{ steps.validate.outcome }}\`
+            #### Terraform Plan: \`${{ steps.plan.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`\n
+            ${{ steps.plan.outputs.stdout || 'there is no plan' }}
+            \`\`\`
+
+            </details>
+
+            Pushed by: @${{ github.actor }}
+            Action: \`${{ github.event_name }}\`
+          `;
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
+
+    - name: check `terraform plan` status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+      shell: sh
+
+    - name: terraform apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false
+      shell: sh
+      working-directory: ${{ inputs.working_directory }}
