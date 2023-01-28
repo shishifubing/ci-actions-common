@@ -2,6 +2,9 @@ name: terraform
 description: run terraform plan on PR and run terraform apply after merge
 
 inputs:
+  working_directory:
+    default: ./
+    description: working directory for all terraform commands
   backend_config:
     default: main.s3.tfbackend
     description: -backend-config for terraform
@@ -16,16 +19,19 @@ runs:
       id: fmt
       run: terraform fmt -check
       shell: sh
+      working-directory: ${{ inputs.working_directory }}
 
     - name: init
       id: init
       run: terraform init -reconfigure -backend-config="${{ inputs.backend_config }}"
       shell: sh
+      working-directory: ${{ inputs.working_directory }}
 
     - name: validate
       id: validate
       run: terraform validate -no-color
       shell: sh
+      working-directory: ${{ inputs.working_directory }}
 
     - name: plan
       id: plan
@@ -35,6 +41,7 @@ runs:
         echo -e "stdout<<EOF\n${output}\nEOF\n" >>"${GITHUB_OUTPUT}"
       continue-on-error: true
       shell: sh
+      working-directory: ${{ inputs.working_directory }}
 
     - name: pr comment
       uses: actions/github-script@v6
@@ -75,3 +82,4 @@ runs:
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
       shell: sh
+      working-directory: ${{ inputs.working_directory }}
