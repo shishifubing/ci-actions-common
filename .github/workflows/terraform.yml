@@ -7,7 +7,7 @@ on:
         default: main.s3.tfbackend
         type: string
         description: -backend-config for terraform
-      working_directory:
+      working-directory:
         default: ./
         type: string
         description: working directory for all steps
@@ -32,10 +32,14 @@ jobs:
     steps:
       - name: mask values
         run: for value in "${{ secrets.mask }}"; do echo "::add-mask::${value}"; done
+        # if there is a custom working-directory, this step will probably fail unless you override it
+        working-directory: ./
 
       - name: setup env
         run: echo "${{ secrets.env }}" >>"${GITHUB_ENV}"
-        
+        # if there is a custom working-directory, this step will probably fail unless you override it
+        working-directory: ./
+
       - name: checkout
         uses: actions/checkout@v3
 
