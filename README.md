@@ -2,36 +2,45 @@
 
 # [`ci-actions-common`][repo-url]
 
-<!-- SHIELDS -->
-[![AGPLv3.0 License][license-shield]][license]
+<!-- shields -->
 
-<!-- ABOUT THE PROJECT -->
+[![License][license-shield]][license]
 
-Reusable github actions and workflows for [shishifubing][owner-url] repositories
+<!-- description -->
 
-### [terraform.yml]
+Reusable github actions for [shishifubing][owner-url] repositories
 
-* `terraform plan` on PR
-* `terraform apply` after merge
+## [terraform.yml]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- run `terraform plan` on PR and leave a comment
+- run `terraform apply` after merge
 
-<!-- USAGE EXAMPLES -->
-
-## Usage
+### Usage
 
 ```yml
 name: "terraform"
-
 on:
   push:
     branches:
       - main
   pull_request:
-
 jobs:
   call:
-    uses: shishifubing/ci-actions-common/.github/workflows/terraform.yml@main
+    runs-on: ubuntu-latest
+    container:
+      image: hashicorp/terraform:1.3.7
+    steps:
+      - name: run terraform
+        uses: shishifubing/ci-actions-common/actions/terraform@main
+        with:
+          working_directory: cloud/yandex
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_BUCKET_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_BUCKET_KEY }}
+          TF_VAR_authorized_key: ${{ secrets.YC_MAIN_ADMIN_AUTHORIZED_KEY }}
+          TF_VAR_authorized_key_bucket: ${{ secrets.YC_BUCKET_ADMIN_AUTHORIZED_KEY }}
+          TF_VAR_static_key_id_bucket: ${{ secrets.YC_BUCKET_ADMIN_STATIC_KEY_ID }}
+          TF_VAR_static_key_bucket: ${{ secrets.YC_BUCKET_ADMIN_STATIC_KEY }}
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -39,7 +48,7 @@ jobs:
 <!-- internal links -->
 
 [license]: ./LICENSE
-[terraform.yml]: ./github/workflows/terraform.yml 
+[terraform.yml]: ./actions/terraform/action.yml
 
 <!-- external links -->
 
