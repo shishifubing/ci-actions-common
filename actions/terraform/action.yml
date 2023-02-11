@@ -64,12 +64,11 @@ runs:
 
             <details>
               <summary>Show Plan</summary>
-
               \`\`\`
-              ${{ plan }}
+              ${plan}
               \`\`\`
-
             </details>
+            ${truncated_message}
 
             Pushed by: @${{ github.actor }}
             Action: \`${{ github.event_name }}\`
