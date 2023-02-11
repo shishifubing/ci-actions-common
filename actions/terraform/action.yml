@@ -37,8 +37,8 @@ runs:
       id: plan
       if: github.event_name == 'pull_request'
       run: |
-        output=$(terraform plan -no-color -input=false)
-        echo -e "stdout<<EOF\n${output}\nEOF\n" >>"${GITHUB_OUTPUT}"
+        terraform plan -out=plan.tmp
+        terraform show -no-color plan.tmp >"${GITHUB_WORKSPACE}/plan.out"
       continue-on-error: true
       shell: sh
       working-directory: ${{ inputs.working_directory }}
@@ -47,20 +47,28 @@ runs:
       uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
       with:
+        # have to use a file - https://github.com/actions/github-script/issues/266#issuecomment-1159681385
         script: |
+          const run_url = process.env.GITHUB_SERVER_URL + '/' + process.env.GITHUB_REPOSITORY + '/actions/runs/' + process.env.GITHUB_RUN_ID
+          const run_link = '<a href="' + run_url + '">Actions</a>.'
+          const fs = require('fs')
+          const plan_file = fs.readFileSync('plan.out', 'utf8')
+          const plan = plan_file.length > 65000 ? plan_file.toString().substring(0, 65000) + " ..." : plan_file
+          const truncated_message = plan_file.length > 65000 ? "Output is too long and was truncated. You can read full Plan in " + run_link + "<br /><br />" : ""
+
           const output = `
             #### Terraform Format and Style: \`${{ steps.fmt.outcome }}\`
             #### Terraform Initialization: \`${{ steps.init.outcome }}\`
             #### Terraform Validation: \`${{ steps.validate.outcome }}\`
             #### Terraform Plan: \`${{ steps.plan.outcome }}\`
 
-            <details><summary>Show Plan</summary>
-
-            \`\`\`\n
-            ${{ steps.plan.outputs.stdout || 'there is no plan' }}
-            \`\`\`
-
+            <details>
+              <summary>Show Plan</summary>
+              \`\`\`
+              ${plan}
+              \`\`\`
             </details>
+            ${truncated_message}
 
             Pushed by: @${{ github.actor }}
             Action: \`${{ github.event_name }}\`
