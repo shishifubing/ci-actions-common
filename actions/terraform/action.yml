@@ -57,21 +57,23 @@ runs:
           const truncated_message = plan_file.length > 65000 ? "Output is too long and was truncated. You can read full Plan in " + run_link + "<br /><br />" : ""
 
           const output = `
-            #### Terraform Format and Style: \`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization: \`${{ steps.init.outcome }}\`
-            #### Terraform Validation: \`${{ steps.validate.outcome }}\`
-            #### Terraform Plan: \`${{ steps.plan.outcome }}\`
+          #### Terraform Format and Style: \`${{ steps.fmt.outcome }}\`
+          #### Terraform Initialization: \`${{ steps.init.outcome }}\`
+          #### Terraform Validation: \`${{ steps.validate.outcome }}\`
+          #### Terraform Plan: \`${{ steps.plan.outcome }}\`
 
-            <details>
-              <summary>Show Plan</summary>
-              \`\`\`\n
-              ${plan}
-              \`\`\`
-            </details>
-            ${truncated_message}
+          <details>
+          <summary>Show Plan</summary>
 
-            Pushed by: @${{ github.actor }}
-            Action: \`${{ github.event_name }}\`
+          \`\`\`
+          ${plan}
+          \`\`\`
+
+          </details>
+          ${truncated_message}
+
+          Pushed by: @${{ github.actor }}
+          Action: \`${{ github.event_name }}\`
           `;
 
           github.rest.issues.createComment({
