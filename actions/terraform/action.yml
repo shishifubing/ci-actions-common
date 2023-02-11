@@ -63,10 +63,12 @@ runs:
             #### Terraform Plan: \`${{ steps.plan.outcome }}\`
 
             <details>
-              <summary>Show Plan</summary>
-              \`\`\`\n
-              ${plan}
-              \`\`\`
+
+            <summary>Show Plan</summary>
+            \`\`\`\n
+            ${plan.replace('`', '\`')}
+            \`\`\`
+
             </details>
             ${truncated_message}
 
