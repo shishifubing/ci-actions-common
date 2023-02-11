@@ -64,7 +64,7 @@ runs:
 
             <details>
               <summary>Show Plan</summary>
-              \`\`\`
+              \`\`\`\n
               ${plan}
               \`\`\`
             </details>
