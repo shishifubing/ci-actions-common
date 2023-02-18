@@ -1,16 +1,14 @@
-<a name="readme-top"></a>
+<div align="center" markdown="1">
 
-# [`ci-actions-common`][repo-url]
+# [`ci-actions-common`][url-repo]
 
-<!-- shields -->
+[![License][shield-license]][url-license]
 
-[![License][license-shield]][license]
+Github actions for [shishifubing][url-owner] repositories
 
-<!-- description -->
+</div>
 
-Reusable github actions for [shishifubing][owner-url] repositories
-
-## [terraform.yml]
+## [terraform]
 
 - run `terraform plan` on PR and leave a comment
 - run `terraform apply` after merge
@@ -43,18 +41,19 @@ jobs:
           TF_VAR_static_key_bucket: ${{ secrets.YC_BUCKET_ADMIN_STATIC_KEY }}
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- relative links -->
 
-<!-- internal links -->
+[terraform]: ./actions/terraform/action.yml
 
-[license]: ./LICENSE
-[terraform.yml]: ./actions/terraform/action.yml
+<!-- project links -->
+
+[url-license]: https://github.com/shishifubing/ci-actions-common/blob/main/LICENSE
+[url-repo]: https://github.com/shishifubing/ci-actions-common
 
 <!-- external links -->
 
-[repo-url]: https://github.com/shishifubing/ci-actions-common
-[owner-url]: https://github.com/shishifubing
+[url-owner]: https://github.com/shishifubing
 
 <!-- project shield links -->
 
-[license-shield]: https://img.shields.io/github/license/shishifubing/ci-actions-common.svg?style=for-the-badge
+[shield-license]: https://img.shields.io/github/license/shishifubing/ci-actions-common.svg?style=for-the-badge
