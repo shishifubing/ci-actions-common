@@ -8,12 +8,24 @@ Github actions for [shishifubing][url-owner] repositories
 
 </div>
 
+## Workflows
+
+### [pr_conventional_title_check]
+
+- Check whether a PR title follows  [Conventional Commits specification][url-conventional-commits-spec]
+
+> **Note**
+>
+> It is a [required workflow](url-required-workflows)
+>
+> It uses https://github.com/amannn/action-semantic-pull-request
+
 ## Actions
 
 ### [terraform]
 
-- run `terraform plan` on PR and leave a comment
-- run `terraform apply` after merge
+- Run `terraform plan` on PR and leave a comment
+- Run `terraform apply` after merge
 
 #### Usage
 
@@ -46,6 +58,8 @@ jobs:
 <!-- relative links -->
 
 [terraform]: ./actions/terraform/action.yml
+[pr_conventional_title_check]: ./.github/workflows/
+
 
 <!-- project links -->
 
@@ -55,6 +69,8 @@ jobs:
 <!-- external links -->
 
 [url-owner]: https://github.com/shishifubing
+[url-conventional-commits-spec]: https://www.conventionalcommits.org/en/v1.0.0/
+[url-required-workflows]: https://docs.github.com/en/actions/using-workflows/required-workflows
 
 <!-- project shield links -->
 
