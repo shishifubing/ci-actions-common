@@ -8,14 +8,14 @@ Github actions for [shishifubing][url-owner] repositories
 
 </div>
 
-# Actions
+## Actions
 
-## [terraform]
+### [terraform]
 
 - run `terraform plan` on PR and leave a comment
 - run `terraform apply` after merge
 
-### Usage
+#### Usage
 
 ```yml
 name: "terraform"
