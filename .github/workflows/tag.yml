@@ -31,7 +31,7 @@ jobs:
           token: ${{ secrets.ci_github_token }}
 
       - name: Install gpg
-        run: apt-get -y install gpg
+        run: apt-get update && apt-get -y install gpg
 
       - name: Import GPG key
         id: import_gpg
