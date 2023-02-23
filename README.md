@@ -4,9 +4,33 @@
 
 [![License][shield-license]][url-license]
 
-Github actions for [shishifubing][url-owner] repositories
+Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
 </div>
+
+## Reusable workflows
+
+### [tag]
+
+- Create a tag, sign it, push it
+
+#### Usage
+
+```yml
+name: Create a tag
+on:
+  push:
+    branches:
+      - main
+jobs:
+  tag:
+    name: Call a workflow
+    uses: shishifubing/ci-actions-common/.github/workflows/tag.yml@main
+    secrets:
+      ci_github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+      gpg_private_key: ${{ secrets.CI_GPG_PRIVATE_KEY }}
+      gpg_passphrase: ${{ secrets.CI_GPG_PASSPHRASE }}
+```
 
 ## Actions
 
@@ -18,7 +42,7 @@ Github actions for [shishifubing][url-owner] repositories
 #### Usage
 
 ```yml
-name: "terraform"
+name: terraform
 on:
   push:
     branches:
@@ -30,7 +54,7 @@ jobs:
     container:
       image: hashicorp/terraform:1.3.7
     steps:
-      - name: run terraform
+      - name: Run terraform
         uses: shishifubing/ci-actions-common/actions/terraform@main
         with:
           working_directory: cloud/yandex
@@ -46,7 +70,7 @@ jobs:
 <!-- relative links -->
 
 [terraform]: ./actions/terraform/action.yml
-
+[tag]: ./.github/workflows/tag.yml
 
 <!-- project links -->
 
