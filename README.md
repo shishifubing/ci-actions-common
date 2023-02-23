@@ -17,28 +17,19 @@ Github actions and reusable workflows for [shishifubing][url-owner] repositories
 #### Usage
 
 ```yml
-name: Tag
+name: Create a tag
 on:
   push:
     branches:
       - main
 jobs:
-  call:
-    runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:1.3.7
-    steps:
-      - name: run terraform
-        uses: shishifubing/ci-actions-common/actions/terraform@main
-        with:
-          working_directory: cloud/yandex
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_BUCKET_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_BUCKET_KEY }}
-          TF_VAR_authorized_key: ${{ secrets.YC_MAIN_ADMIN_AUTHORIZED_KEY }}
-          TF_VAR_authorized_key_bucket: ${{ secrets.YC_BUCKET_ADMIN_AUTHORIZED_KEY }}
-          TF_VAR_static_key_id_bucket: ${{ secrets.YC_BUCKET_ADMIN_STATIC_KEY_ID }}
-          TF_VAR_static_key_bucket: ${{ secrets.YC_BUCKET_ADMIN_STATIC_KEY }}
+  tag:
+    name: Call a workflow
+    uses: shishifubing/ci-actions-common/.github/workflows/tag.yml@main
+    secrets:
+      ci_github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+      gpg_private_key: ${{ secrets.CI_GPG_PRIVATE_KEY }}
+      gpg_passphrase: ${{ secrets.CI_GPG_PASSPHRASE }}
 ```
 
 ## Actions
@@ -63,7 +54,7 @@ jobs:
     container:
       image: hashicorp/terraform:1.3.7
     steps:
-      - name: run terraform
+      - name: Run terraform
         uses: shishifubing/ci-actions-common/actions/terraform@main
         with:
           working_directory: cloud/yandex
