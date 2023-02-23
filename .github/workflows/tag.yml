@@ -21,8 +21,6 @@ jobs:
   tag:
     name: Create a tag
     runs-on: ubuntu-latest
-    container: gittools/gitversion:5.12.0-ubuntu.20.04-6.0
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -30,8 +28,16 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.ci_github_token }}
 
-      - name: Install gpg
-        run: apt-get update && apt-get -y install gpg
+      - name: Download gitversion
+        # v0.9.15 https://github.com/GitTools/actions/releases
+        uses: gittools/actions/gitversion/setup@31b3198b2de324472547fecec2c0f721b70c38e2
+        with:
+          versionSpec: 5.x
+
+      - name: Determine version
+        id: gitversion
+        # v0.9.15 https://github.com/GitTools/actions/releases
+        uses: gittools/actions/gitversion/execute@31b3198b2de324472547fecec2c0f721b70c38e2
 
       - name: Import GPG key
         id: import_gpg
@@ -51,10 +57,9 @@ jobs:
           GIT_COMMITTER_NAME: ${{ steps.import_gpg.outputs.name }}
           GIT_COMMITTER_EMAIL: ${{ steps.import_gpg.outputs.email }}
         run: |
-          gitversion="/tools/dotnet-gitversion"
-          tag="v$("${gitversion}" -showvariable SemVer)"
-          commits="$("${gitversion}" -showvariable CommitsSinceVersionSource)"
-          commits=$(git log -n "${commits}" --skip=1 --pretty='format:  - %H %s')
+          tag="v${{ steps.gitversion.outputs.semVer }}"
+          commits_count="${GITVERSION_COMMITSSINCEVERSIONSOURCE}"
+          commits=$(git log -n "${commits_count}" --skip=1 --pretty='format:  - %H %s')
 
           # create the tag
           git tag                                       \
