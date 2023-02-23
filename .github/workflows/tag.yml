@@ -51,8 +51,9 @@ jobs:
           GIT_COMMITTER_NAME: ${{ steps.import_gpg.outputs.name }}
           GIT_COMMITTER_EMAIL: ${{ steps.import_gpg.outputs.email }}
         run: |
-          tag="v$(gitversion -showvariable SemVer)"
-          commits="$(gitversion -showvariable CommitsSinceVersionSource)"
+          gitversion="/tools/dotnet-gitversion"
+          tag="v$("${gitversion}" -showvariable SemVer)"
+          commits="$("${gitversion}" -showvariable CommitsSinceVersionSource)"
           commits=$(git log -n "${commits}" --skip=1 --pretty='format:  - %H %s')
 
           # create the tag
