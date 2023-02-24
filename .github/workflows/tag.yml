@@ -65,13 +65,13 @@ jobs:
           commits=$(git log -n "${commits_count}" --skip=1 --pretty='format:  - %H %s')
 
           # create the tag
-          git tag                                       \
-            -s                                          \
-            -a "${tag}"                                 \
-            -m "${{ steps.gitversion.outputs.semVer }}" \
-            -m "‎"                                      \
-            -m "Commits:"                               \
-            -m "${commits}"                             \
+          git tag                                               \
+            -s                                                  \
+            -a "${tag}"                                         \
+            -m "Version ${{ steps.gitversion.outputs.semVer }}" \
+            -m "‎"                                              \
+            -m "Commits:"                                       \
+            -m "${commits}"                                     \
             -m "Job-Url: ${{ env.JOB_URL }}"
           # verify the tag
           git tag -v "${tag}"
