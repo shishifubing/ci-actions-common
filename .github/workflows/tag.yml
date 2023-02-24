@@ -15,7 +15,7 @@ on:
 
 env:
   BUILD_NUMBER: ${{ github.run_number }}
-  BUILD_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+  JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
 jobs:
   tag:
@@ -66,10 +66,10 @@ jobs:
             -s                                          \
             -a "${tag}"                                 \
             -m "${{ steps.gitversion.outputs.semVer }}" \
-            -m "‎"                               \
+            -m "‎"                                      \
             -m "Commits:"                               \
-            -m "${commits}"              \
-            -m "Build url: ${{ env.BUILD_URL }}"
+            -m "${commits}"                             \
+            -m "Job-Url: ${{ env.JOB_URL }}"
           # verify the tag
           git tag -v "${tag}"
           # push the tag
