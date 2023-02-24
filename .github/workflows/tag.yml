@@ -5,16 +5,6 @@ on:
     branches:
       - main
   workflow_call:
-    secrets:
-      CI_GITHUB_TOKEN:
-        description: Github token to checkout the repo and push the tag
-        required: true
-      CI_GPG_PRIVATE_KEY:
-        description: GPG private key to sign the tag
-        required: true
-      CI_GPG_PASSPHRASE:
-        description: Passphrase for the private key
-        required: true
 
 env:
   BUILD_NUMBER: ${{ github.run_number }}
