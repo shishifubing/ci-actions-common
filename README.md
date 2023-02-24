@@ -26,10 +26,7 @@ jobs:
   tag:
     name: Call a workflow
     uses: shishifubing/ci-actions-common/.github/workflows/tag.yml@main
-    secrets:
-      CI_GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
-      CI_GPG_PRIVATE_KEY: ${{ secrets.CI_GPG_PRIVATE_KEY }}
-      CI_GPG_PASSPHRASE: ${{ secrets.CI_GPG_PASSPHRASE }}
+    secrets: inherit
 ```
 
 ## Actions
