@@ -8,6 +8,14 @@ Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
 </div>
 
+## Required workflows
+
+### [actionlint]
+
+- Lint github workflows
+
+Uses https://github.com/rhysd/actionlint
+
 ## Reusable workflows
 
 ### [tag]
@@ -68,6 +76,7 @@ jobs:
 
 [terraform]: ./actions/terraform/action.yml
 [tag]: ./.github/workflows/tag.yml
+[actionlint]: ./.github/workflows/actionlint.yml
 
 <!-- project links -->
 
