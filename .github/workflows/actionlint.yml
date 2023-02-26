@@ -3,6 +3,10 @@ name: Actionlint
 on:
   pull_request:
 
+env:
+  # v1.6.23 https://github.com/rhysd/actionlint/releases
+  SCRIPT_URL: https://raw.githubusercontent.com/rhysd/actionlint/51803be108613182daa27af760ae117916b53e3f/scripts/download-actionlint.bash
+
 jobs:
   actionlint:
     runs-on: ubuntu-latest
@@ -13,5 +17,14 @@ jobs:
 
       - name: Lint workflows
         run: |
-          bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          workflows_changed=""
+          for file in $(git diff --name-only HEAD HEAD~1); do
+              echo "File changed: ${file}"
+              [[ "${file}" == .github/* ]] || continue
+              workflows_changed="true"
+              break
+          done
+          [[ "${workflows_changed}" ]] || exit 0
+
+          bash <(curl "${{ env.SCRIPT_URL }}")
           ./actionlint -color
