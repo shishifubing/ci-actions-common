@@ -24,7 +24,7 @@ jobs:
               "${REQUEST_URL}"                                   \
               | jq -r 'any(.[].filename; startswith(".github"))' 
           )
-          echo "changed=${changed}">>"${GITHUB_OUTPUT}"
+          echo "changed=${changed}" >>"${GITHUB_OUTPUT}"
 
   lintWorkflows:
     runs-on: ubuntu-latest
