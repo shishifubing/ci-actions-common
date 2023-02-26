@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Check for changes
     outputs:
-      changed: ${{ steps.check_changed_files.outputs.test }}
+      changed: ${{ steps.check_changed_files.outputs.changed }}
     steps:
       - name: Check changed files
         id: check_changed_files
