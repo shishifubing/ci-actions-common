@@ -19,9 +19,9 @@ jobs:
         id: check_changed_files
         run: |
           changed=$(
-            gh api                                     \
-              -H "Accept: application/vnd.github+json" \
-              "${REQUEST_URL}"
+            gh api                                               \
+              -H "Accept: application/vnd.github+json"           \
+              "${REQUEST_URL}"                                   \
               | jq -r 'any(.[].filename; startswith(".github"))' 
           )
           echo "changed=${changed}">>"${GITHUB_OUTPUT}"
