@@ -18,6 +18,7 @@ jobs:
       - name: Check changed files
         id: check_changed_files
         run: |
+          set -Eeuxo pipefail
           changed=$(
             gh api                                               \
               -H "Accept: application/vnd.github+json"           \
