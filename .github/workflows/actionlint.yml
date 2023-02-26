@@ -15,12 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch: 2
+          fetch-depth: 2
 
       - name: Lint workflows
         run: |
           workflows_changed=""
-          for file in $(git diff --name-only HEAD HEAD~1); do
+          for file in $(git diff --name-only HEAD^ HEAD); do
               echo "File changed: ${file}"
               [[ "${file}" == .github/* ]] || continue
               workflows_changed="true"
