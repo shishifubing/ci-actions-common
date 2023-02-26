@@ -13,9 +13,7 @@ Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
 ### [actionlint]
 
-- Lint github workflows
-
-Uses https://github.com/rhysd/actionlint
+- Lint github workflows using https://github.com/rhysd/actionlint
 
 ## Reusable workflows
 
