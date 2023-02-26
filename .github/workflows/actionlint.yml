@@ -1,16 +1,35 @@
 name: Actionlint
 
 on:
-  pull_request:
+  pull_request_target:
 
 env:
   # v1.6.23 https://github.com/rhysd/actionlint/releases
   SCRIPT_URL: https://raw.githubusercontent.com/rhysd/actionlint/51803be108613182daa27af760ae117916b53e3f/scripts/download-actionlint.bash
+  REQUEST_URL: /repos/${{ github.repository }}/pulls/${{ github.event.number }}/files
 
 jobs:
-  actionlint:
+  check_changes:
     runs-on: ubuntu-latest
-    name: Lint workflows
+    name: Check for changes
+    outputs:
+      changed: ${{ steps.check_changed_files.outputs.test }}
+    steps:
+      - name: Check changed files
+        id: check_changed_files
+        run: |
+          changed=$(
+            gh api                                     \
+              -H "Accept: application/vnd.github+json" \
+              "${REQUEST_URL}"
+              | jq -r 'any(.[].filename; startswith(".github"))' 
+          )
+          echo "changed=${changed}">>"${GITHUB_OUTPUT}"
+
+  lintWorkflows:
+    runs-on: ubuntu-latest
+    needs: check_changes
+    if: ${{ needs.check_changes.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -19,14 +38,5 @@ jobs:
 
       - name: Lint workflows
         run: |
-          workflows_changed=""
-          for file in $(git diff --name-only HEAD^ HEAD); do
-              echo "File changed: ${file}"
-              [[ "${file}" == .github/* ]] || continue
-              workflows_changed="true"
-              break
-          done
-          [[ "${workflows_changed}" ]] || exit 0
-
           bash <(curl "${{ env.SCRIPT_URL }}")
           ./actionlint -color
