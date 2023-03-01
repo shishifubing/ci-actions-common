@@ -67,11 +67,11 @@ jobs:
             -s                                                  \
             -a "${tag}"                                         \
             -m "Version ${{ steps.gitversion.outputs.semVer }}" \
-            -m " "                                              \
+            -m "‎"                                              \
             -m "Commits:"                                       \
             -m "${commits}"                                     \
             -m "Job-url: ${{ env.JOB_URL }}"                    \
-            -m " "
+            -m "‎"
           # verify the tag
           git tag -v "${tag}"
           # push the tag
