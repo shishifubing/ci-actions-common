@@ -9,6 +9,7 @@ on:
 env:
   BUILD_NUMBER: ${{ github.run_number }}
   JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+  GITVERSION_CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/GitVersion.yml
 
 jobs:
   tag:
@@ -20,6 +21,11 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.CI_GITHUB_TOKEN }}
+          
+      - name: Download gitversion config
+        run: |
+          rm -rf GitVersion.yml
+          wget "${GITVERSION_CONFIG_URL}"
 
       - name: Download gitversion
         # v0.9.15 https://github.com/GitTools/actions/releases
@@ -31,6 +37,8 @@ jobs:
         id: gitversion
         # v0.9.15 https://github.com/GitTools/actions/releases
         uses: gittools/actions/gitversion/execute@31b3198b2de324472547fecec2c0f721b70c38e2
+        with:
+          useConfigFile: true
 
       - name: Import GPG key
         id: import_gpg
