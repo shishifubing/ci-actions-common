@@ -16,6 +16,10 @@ Github actions and reusable workflows for [shishifubing][url-owner] repositories
 - Lint github workflows using [rhysd/actionlint][url-actionlint]
   (only if something has changed in .github folder)
 
+### [labeler-pr-triage]
+
+- Laber PR using [actions/labeler][url-prlabeler]
+
 ## Reusable workflows
 
 ### [tag]
@@ -78,6 +82,8 @@ jobs:
 [tag]: .github/workflows/tag.yml
 [actionlint]: .github/workflows/actionlint.yml
 [.github/gitversion.yml]: .github/GitVersion.yml
+[labeler-issue-triage]: .github/workflows/labeler-issue-triage.yml
+[labeler-pr-triage]: .github/workflows/labeler-pr-triage.yml
 
 <!-- project links -->
 
@@ -91,6 +97,8 @@ jobs:
 [url-gitversion-action]: https://github.com/GitTools/actions
 [url-gitversion]: https://github.com/GitTools/GitVersion
 [url-actionlint]: https://github.com/rhysd/actionlint
+[url-issuelabeler]: https://github.com/github/issue-labeler
+[url-prlabeler]: https://github.com/actions/labeler
 
 <!-- project badge links -->
 
