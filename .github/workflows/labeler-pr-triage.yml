@@ -1,0 +1,33 @@
+name: required/labeler-pr-triage
+
+on:
+  - pull_request_target
+  - pull_request
+
+jobs:
+  type:
+    name: Add a type label
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          sync-labels: true
+          configuration-path: .github/labeler-pr-triage.yml
+
+  size:
+    name: Add a size label
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+
+    steps:
+      # v1.8.1 https://github.com/CodelyTV/pr-size-labeler
+      - uses: CodelyTV/pr-size-labeler@54ef36785e9f4cb5ecf1949cfc9b00dbb621d761
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
