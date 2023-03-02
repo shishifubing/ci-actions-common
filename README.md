@@ -14,7 +14,7 @@ Github actions and reusable workflows for [shishifubing][url-owner] repositories
 ### [actionlint]
 
 - Lint github workflows using [rhysd/actionlint][url-actionlint]
-  (only if something has changed in .github folder)
+  (only if something in .github folder was changed)
 
 ### [labeler-pr-triage]
 

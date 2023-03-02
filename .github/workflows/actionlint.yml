@@ -28,7 +28,8 @@ jobs:
           )
           echo "changed=${changed}" >>"${GITHUB_OUTPUT}"
 
-  lintWorkflows:
+  lint_workflows:
+    name: Lint workflows
     runs-on: ubuntu-latest
     needs: check_changes
     if: ${{ needs.check_changes.outputs.changed == 'true' }}
