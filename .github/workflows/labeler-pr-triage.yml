@@ -6,7 +6,7 @@ on:
 
 jobs:
   type:
-    name: Add a type label
+    name: Add type labels
     permissions:
       contents: read
       pull-requests: write

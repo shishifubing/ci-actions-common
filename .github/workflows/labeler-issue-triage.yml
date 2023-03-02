@@ -5,7 +5,7 @@ on:
 
 jobs:
   label:
-    name: Label issue
+    name: Add labels
     runs-on: ubuntu-latest
     steps:
       - uses: github/issue-labeler@v3
