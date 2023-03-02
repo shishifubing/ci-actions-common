@@ -13,15 +13,22 @@ Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
 ### [actionlint]
 
-- Lint github workflows using https://github.com/rhysd/actionlint
+- Lint github workflows using [rhysd/actionlint][url-actionlint]
+  (only if something has changed in .github folder)
+
+### [labeler-pr-triage]
+
+- Laber PR using [actions/labeler][url-prlabeler]
 
 ## Reusable workflows
 
 ### [tag]
 
-- Create a tag, sign it, push it
-
-#### Usage
+- Determine current version using [GitVersion][url-gitversion] (via
+  [GitVersion action][url-gitversion-action])
+  (GitVersion config - [.github/GitVersion.yml])
+- Create a signed tag
+- Push it
 
 ```yml
 name: Create a tag
@@ -42,8 +49,6 @@ jobs:
 
 - Run `terraform plan` on PR and leave a comment
 - Run `terraform apply` after merge
-
-#### Usage
 
 ```yml
 name: terraform
@@ -73,9 +78,12 @@ jobs:
 
 <!-- relative links -->
 
-[terraform]: ./actions/terraform/action.yml
-[tag]: ./.github/workflows/tag.yml
-[actionlint]: ./.github/workflows/actionlint.yml
+[terraform]: actions/terraform/action.yml
+[tag]: .github/workflows/tag.yml
+[actionlint]: .github/workflows/actionlint.yml
+[.github/gitversion.yml]: .github/GitVersion.yml
+[labeler-issue-triage]: .github/workflows/labeler-issue-triage.yml
+[labeler-pr-triage]: .github/workflows/labeler-pr-triage.yml
 
 <!-- project links -->
 
@@ -86,6 +94,11 @@ jobs:
 
 [url-owner]: https://github.com/shishifubing
 [url-conventionalcommits]: https://conventionalcommits.org
+[url-gitversion-action]: https://github.com/GitTools/actions
+[url-gitversion]: https://github.com/GitTools/GitVersion
+[url-actionlint]: https://github.com/rhysd/actionlint
+[url-issuelabeler]: https://github.com/github/issue-labeler
+[url-prlabeler]: https://github.com/actions/labeler
 
 <!-- project badge links -->
 
