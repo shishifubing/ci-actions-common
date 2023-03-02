@@ -1,4 +1,4 @@
-name: Create a tag
+name: required/tag
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.CI_GITHUB_TOKEN }}
-          
+
       - name: Download gitversion config
         run: |
           rm -rf GitVersion.yml

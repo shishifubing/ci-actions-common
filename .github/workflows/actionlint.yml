@@ -1,4 +1,4 @@
-name: Actionlint
+name: required/actionlint
 
 on:
   pull_request:
@@ -24,7 +24,7 @@ jobs:
             gh api                                               \
               -H "Accept: application/vnd.github+json"           \
               "${REQUEST_URL}"                                   \
-              | jq -r 'any(.[].filename; startswith(".github"))' 
+              | jq -r 'any(.[].filename; startswith(".github"))'
           )
           echo "changed=${changed}" >>"${GITHUB_OUTPUT}"
 
