@@ -1,4 +1,4 @@
-name: required/actionlint
+name: required / actionlint
 
 on:
   pull_request:

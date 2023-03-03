@@ -1,4 +1,4 @@
-name: required/labeler-pr-triage
+name: required / labeler-pr-triage
 
 on:
   - pull_request
