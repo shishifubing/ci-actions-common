@@ -18,15 +18,15 @@ Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
 ### [labeler-pr-triage]
 
-- Laber PR using [actions/labeler][url-prlabeler]
+- Label PR using [actions/labeler][url-prlabeler]
+- Add a size label to PR using [CodelyTV/pr-size-labeler][url-prsizelabeler]
 
 ## Reusable workflows
 
 ### [tag]
 
-- Determine current version using [GitVersion][url-gitversion] (via
-  [GitVersion action][url-gitversion-action])
-  (GitVersion config - [.github/GitVersion.yml])
+- Determine current version using [GitVersion][url-gitversion] and 
+  [GitVersion action][url-gitversion-action] (GitVersion config - [.github/GitVersion.yml])
 - Create a signed tag
 - Push it
 
@@ -99,6 +99,7 @@ jobs:
 [url-actionlint]: https://github.com/rhysd/actionlint
 [url-issuelabeler]: https://github.com/github/issue-labeler
 [url-prlabeler]: https://github.com/actions/labeler
+[url-prsizelabeler]: https://github.com/CodelyTV/pr-size-labeler
 
 <!-- project badge links -->
 
