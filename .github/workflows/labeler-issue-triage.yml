@@ -1,14 +1,16 @@
-name: required/labeler-issue-triage
+name: labeler-issue-triage
 on:
   issues:
     types: [opened, edited]
+  workflow_call:
 
 jobs:
   label:
     name: Add labels
     runs-on: ubuntu-latest
     steps:
-      - uses: github/issue-labeler@v3
+      # v3.0 https://github.com/github/issue-labeler/releases
+      - uses: github/issue-labeler@cd54a96bcc32e2a890e865b2eceffee3fc458b9d 
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           configuration-path: .github/labeler-issue-triage.yml
