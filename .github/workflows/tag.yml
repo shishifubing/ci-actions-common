@@ -1,10 +1,14 @@
-name: required/tag
+name: tag
 
 on:
   push:
     branches:
       - main
   workflow_call:
+    outputs:
+      semVer:
+        description: SemVer
+        value: ${{ jobs.tag.outputs.semVer }}
 
 env:
   BUILD_NUMBER: ${{ github.run_number }}
@@ -15,6 +19,9 @@ jobs:
   tag:
     name: Create a tag
     runs-on: ubuntu-latest
+    outputs:
+      semVer: ${{ steps.gitversion.outputs.semVer }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -67,7 +74,7 @@ jobs:
             -s                                                  \
             -a "${tag}"                                         \
             -m "Version ${{ steps.gitversion.outputs.semVer }}" \
-            -m "‎"                                              \
+            -m "‎"                                       \
             -m "Commits:"                                       \
             -m "${commits}"                                     \
             -m "Job-url: ${{ env.JOB_URL }}"                    \
