@@ -32,5 +32,5 @@ config=$(
     -f previous_tag_name="${last_release}"
 )
 
-echo "name=$(echo "${config}" | jq .name)" >>"${GITHUB_OUTPUT}"
-echo "body=$(echo "${config}" | jq .body)" >>"${GITHUB_OUTPUT}"
+echo "name=$(echo "${config}" | jq -r .name)" >>"${GITHUB_OUTPUT}"
+echo "body=$(echo "${config}" | jq -r .body)" >>"${GITHUB_OUTPUT}"

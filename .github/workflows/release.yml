@@ -33,5 +33,5 @@ jobs:
             /repos/${{ github.repository }}/releases  \
             -f tag_name='${{ github.ref_name }}'      \
             -F draft=true                             \
-            -f name="${{ steps.notes.outputs.name }}" \
-            -f body="${{ steps.notes.outputs.body }}"
+            -f name='${{ steps.notes.outputs.name }}' \
+            -f body='${{ steps.notes.outputs.body }}'
