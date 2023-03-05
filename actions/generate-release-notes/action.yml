@@ -19,4 +19,5 @@ runs:
   using: docker
   image: Dockerfile
   args:
-    - ${{ inputs.repository }} ${{ inputs.ref_name }}
+    - ${{ inputs.repository }}
+    - ${{ inputs.ref_name }}
