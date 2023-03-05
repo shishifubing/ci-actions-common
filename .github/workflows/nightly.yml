@@ -13,10 +13,13 @@ jobs:
   release:
     name: Publish a release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    #permissions:
+    #  contents: write
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Check latest release
         id: prepare
         run: |
