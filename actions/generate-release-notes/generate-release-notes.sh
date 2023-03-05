@@ -5,12 +5,12 @@ github_repository="${1}"
 current_tag="${2}"
 
 releases_count=$(
-    gh api                                   \
+    gh api                                       \
         --method GET                             \
         -H "Accept: application/vnd.github+json" \
         -F per_page=1                            \
         "/repos/${github_repository}/releases"   \
-        | jq length
+        | jq -r length
 )
 
 last_release="v0.1.0"
@@ -19,7 +19,7 @@ if [[ "${releases_count}" != 0 ]]; then
         gh api                                            \
             -H "Accept: application/vnd.github+json"      \
             "/repos/${github_repository}/releases/latest" \
-            | jq .tag_name
+            | jq -r .tag_name
     )
 fi
 
@@ -31,5 +31,8 @@ gh api                                                    \
     -f previous_tag_name="${last_release}"                \
     >notes.json
 
-printf "%s" "name=$(jq -r .name notes.json)" >>"${GITHUB_OUTPUT}"
-printf "%s" "body=$(jq -r .body notes.json)" >>"${GITHUB_OUTPUT}"
+name=$(jq -r .name notes.json)
+body=$(jq -r .body notes.json)
+
+printf "%s" "name=${name}" >>"${GITHUB_OUTPUT}"
+printf "%s" "body=${body}" >>"${GITHUB_OUTPUT}"
