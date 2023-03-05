@@ -1,0 +1,23 @@
+name: release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  release:
+    name: Create a release draft
+    needs: tag
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create a release draft
+        run: |
+          gh api                                     \
+            --method POST                            \
+            -H "Accept: application/vnd.github+json" \
+            /repos/${{ github.repository }}/releases \
+            -f tag_name='${{ github.ref_name }}'     \
+          -F draft=true                              \
+          -F generate_release_notes=true
