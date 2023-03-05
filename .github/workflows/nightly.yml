@@ -11,7 +11,7 @@ env:
 
 jobs:
   release:
-    name: Create a release draft
+    name: Publish a release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,13 +22,13 @@ jobs:
         run: |
           create_release=true
           latest_gh_release=$(
-            gh api
+            gh api                                      \
               -H "Accept: application/vnd.github+json"  \
               /repos/${{ github.repo }}/releases/latest \
               --jq .tag_name
           )
           latest_tag=$(
-            gh api
+            gh api                                     \
               -H "Accept: application/vnd.github+json" \
               /repos/${{ github.repo }}/tags           \
               --jq .[0].name
