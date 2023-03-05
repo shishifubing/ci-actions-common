@@ -7,7 +7,7 @@ env:
   # v1.6.23 https://github.com/rhysd/actionlint/releases
   SCRIPT_URL: https://raw.githubusercontent.com/rhysd/actionlint/51803be108613182daa27af760ae117916b53e3f/scripts/download-actionlint.bash
   REQUEST_URL: /repos/${{ github.repository }}/pulls/${{ github.event.number }}/files
-  GH_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
+  GH_TOKEN: ${{ github.token }}
 
 jobs:
   check_changes:
