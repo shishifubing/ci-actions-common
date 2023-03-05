@@ -23,14 +23,13 @@ if [[ "${releases_count}" != 0 ]]; then
     )
 fi
 
-config=$(
-    gh api                                                \
+gh api                                                    \
     --method POST                                         \
     -H "Accept: application/vnd.github+json"              \
     "/repos/${github_repository}/releases/generate-notes" \
     -f tag_name="${current_tag}"                          \
-    -f previous_tag_name="${last_release}"
-)
+    -f previous_tag_name="${last_release}"                \
+    >notes.json
 
-printf "%s" "name=$(jq -r .name <<<"${config}")" >>"${GITHUB_OUTPUT}"
-printf "%s" "body=$(jq -r .body <<<"${config}")" >>"${GITHUB_OUTPUT}"
+printf "%s" "name=$(jq -r .name notes.json)" >>"${GITHUB_OUTPUT}"
+printf "%s" "body=$(jq -r .body notes.json)" >>"${GITHUB_OUTPUT}"
