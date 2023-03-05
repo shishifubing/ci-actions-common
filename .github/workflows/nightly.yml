@@ -22,15 +22,15 @@ jobs:
         run: |
           create_release=true
           latest_gh_release=$(
-            gh api                                      \
-              -H "Accept: application/vnd.github+json"  \
-              /repos/${{ github.repo }}/releases/latest \
+            gh api                                              \
+              -H "Accept: application/vnd.github+json"          \
+              "/repos/${{ github.repository }}/releases/latest" \
               --jq .tag_name
           )
           latest_tag=$(
             gh api                                     \
               -H "Accept: application/vnd.github+json" \
-              /repos/${{ github.repo }}/tags           \
+              "/repos/${{ github.repository }}/tags"   \
               --jq .[0].name
           )
           if [ "${latest_gh_release}" = "${latest_tag}" ]; then
