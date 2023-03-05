@@ -6,10 +6,6 @@ on:
       - v*
   pull_request:
   workflow_call:
-    outputs:
-      semVer:
-        description: SemVer
-        value: ${{ jobs.tag.outputs.semVer }}
 
 env:
   GH_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
