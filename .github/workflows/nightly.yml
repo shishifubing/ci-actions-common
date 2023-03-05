@@ -13,8 +13,6 @@ jobs:
   release:
     name: Publish a release
     runs-on: ubuntu-latest
-    #permissions:
-    #  contents: write
 
     steps:
       - name: Check latest release
@@ -49,3 +47,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ steps.prepare.outputs.version }}
+          generate_release_notes: true
