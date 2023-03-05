@@ -1,0 +1,50 @@
+name: nightly
+
+on:
+  schedule:
+    # daily at 23:00 UTC
+    - cron: 0 23 * * *
+  pull_request:
+
+env:
+  GH_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
+
+jobs:
+  release:
+    name: Create a release draft
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check latest release
+        id: prepare
+        run: |
+          create_release=true
+          latest_gh_release=$(
+            gh api
+              -H "Accept: application/vnd.github+json"  \
+              /repos/${{ github.repo }}/releases/latest \
+              --jq .tag_name
+          )
+          latest_tag=$(
+            gh api
+              -H "Accept: application/vnd.github+json" \
+              /repos/${{ github.repo }}/tags           \
+              --jq .[0].name
+          )
+          if [ "${latest_gh_release}" = "${latest_tag}" ]; then
+            create_release=false
+          fi
+
+          {
+            echo "create_release=${create_release}"
+            echo "latest_release_version=${latest_gh_release}"
+            echo "version=${latest_tag}"
+          } >>"${GITHUB_OUTPUT}"
+
+      - name: Create a release
+        if: steps.prepare.outputs.create_release == 'true'
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
