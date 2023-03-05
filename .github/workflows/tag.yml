@@ -1,6 +1,9 @@
 name: tag
 
 on:
+  push:
+    branches:
+      - main
   workflow_call:
     outputs:
       semVer:
