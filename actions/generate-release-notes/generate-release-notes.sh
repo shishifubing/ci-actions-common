@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+set -Eeuxo pipefail
 
 github_repository="${1}"
 current_tag="${2}"
@@ -13,7 +14,7 @@ releases_count=$(
 )
 
 last_release="v0.1.0"
-if [ "${releases_count}" != 0 ]; then
+if [[ "${releases_count}" != 0 ]]; then
     last_release=$(
         gh api                                            \
             -H "Accept: application/vnd.github+json"      \
