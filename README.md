@@ -2,10 +2,9 @@
 
 # [`ci-actions-common`][url-repo]
 
-Github actions and reusable workflows for [shishifubing][url-owner] repositories
-
 [![License][badge-license]][url-license]
-[![Conventional Commits][badge-conventionalcommits]][url-conventionalcommits]
+
+Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
 </div>
 
@@ -103,8 +102,4 @@ jobs:
 
 <!-- project badge links -->
 
-[badge-license]: https://img.shields.io/github/license/shishifubing/ci-actions-common.svg?style=for-the-badge
-
-<!-- other badge links -->
-
-[badge-conventionalcommits]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white&style=for-the-badge
+[badge-license]: https://img.shields.io/github/license/shishifubing/ci-actions-common.svg
