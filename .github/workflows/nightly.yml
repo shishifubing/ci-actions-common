@@ -30,6 +30,7 @@ jobs:
             gh api                                              \
               -H "Accept: application/vnd.github+json"          \
               "/repos/${{ github.repository }}/releases/latest" \
+              --silent                                          \
               --jq .tag_name                                    \
               || echo "0.1.0"
           )
@@ -38,6 +39,7 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               "/repos/${{ github.repository }}/tags"   \
               --jq .[0].name                           \
+              --silent                                 \
               || echo "0.1.0"
           )
 
