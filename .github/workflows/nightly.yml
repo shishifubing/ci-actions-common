@@ -6,9 +6,6 @@ on:
     - cron: 0 23 * * *
   pull_request:
 
-env:
-  GH_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
-
 jobs:
   check_release:
     name: Check latest release
@@ -17,6 +14,8 @@ jobs:
       create_release: ${{ steps.check.outputs.create_release }}
       latest_release_version: ${{ steps.check.outputs.latest_release_version }}
       version: ${{ steps.check.outputs.version }}
+    env:
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - name: Check latest release
@@ -56,6 +55,6 @@ jobs:
       - name: Create a release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           tag_name: ${{ needs.check_release.outputs.version }}
           generate_release_notes: true
