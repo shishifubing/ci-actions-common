@@ -53,7 +53,7 @@ jobs:
         id: notes
         if: steps.check.outputs.create_release == 'true'
         run: |
-          tag='${{ needs.check_release.outputs.version }}'
+          tag='${{ steps.check.outputs.version }}'
           previous_tag='${{ steps.check.outputs.latest_release_version }}'
           gh api                                                      \
             --method POST                                             \
