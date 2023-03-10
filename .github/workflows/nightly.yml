@@ -14,9 +14,9 @@ jobs:
     name: Check latest release
     runs-on: ubuntu-latest
     outputs:
-      create_release: ${{ steps.outputs.check.create_release }}
-      latest_release_version: ${{ steps.outputs.check.latest_release_version }}
-      version: ${{ steps.outputs.check.version }}
+      create_release: ${{ steps.check.outputs..create_release }}
+      latest_release_version: ${{ steps.check.outputs.latest_release_version }}
+      version: ${{ steps.check.outputs.version }}
 
     steps:
       - name: Check latest release
