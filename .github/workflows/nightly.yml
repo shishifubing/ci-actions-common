@@ -53,6 +53,11 @@ jobs:
     if: needs.check_release.outputs.create_release == 'true'
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ github.token }}
+
       - name: Create a release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
         with:
@@ -61,14 +66,12 @@ jobs:
           generate_release_notes: true
 
       - name: Update CHANGELOG.md
-        if: steps.build_github_release.outputs.changelog != ''
         uses: stefanzweifel/changelog-updater-action@bbfa2bd8afcc53bf7ec1f01e69a7847d82a8b4c6 # v1
         with:
           latest-version: ${{ needs.check_release.outputs.version }}
           release-notes: "## test"
 
       - name: Commit updated CHANGELOG.md
-        if: steps.build_github_release.outputs.changelog != ''
         uses: stefanzweifel/git-auto-commit-action@3ea6ae190baf489ba007f7c92608f33ce20ef04a # v4
         with:
           commit_message: "chore: update CHANGELOG"
