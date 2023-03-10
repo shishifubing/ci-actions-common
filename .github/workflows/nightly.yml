@@ -17,8 +17,8 @@ jobs:
       create_release: ${{ steps.check.outputs.create_release }}
       last_version: ${{ steps.check.outputs.latest_release_version }}
       version: ${{ steps.check.outputs.version }}
-      name: ${{ steps.notes.name }}
-      body: ${{ steps.notes.body }}
+      name: ${{ steps.notes.outputs.name }}
+      body: ${{ steps.notes.outputs.body }}
     env:
       GH_TOKEN: ${{ github.token }}
 
