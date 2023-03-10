@@ -65,7 +65,9 @@ jobs:
 
           {
             echo "name=$(jq -r .name release_notes.json)"
-            echo "body=$(jq -r .body release_notes.json)"
+            echo "body<<EOF"
+            jq -r .body release_notes.json
+            echo "EOF"
           } >>"${GITHUB_OUTPUT}"
 
   release:
