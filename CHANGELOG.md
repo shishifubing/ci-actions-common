@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v0.1.30 - 2023-03-10
+
+<!-- Release notes generated using configuration in .github/release.yml at v0.1.30 -->
+### What's Changed
+
+#### Other Changes
+
+- Add --auto to changelog PR merge by @tiandaoburen in https://github.com/shishifubing/ci-actions-common/pull/63
+
+### New Contributors
+
+- @shishifubing-bot made their first contribution in https://github.com/shishifubing/ci-actions-common/pull/62
+
+**Full Changelog**: https://github.com/shishifubing/ci-actions-common/compare/v0.1.28...v0.1.30
+
 ## v0.1.28 - 2023-03-10
 
 <!-- Release notes generated using configuration in .github/release.yml at v0.1.28 -->
