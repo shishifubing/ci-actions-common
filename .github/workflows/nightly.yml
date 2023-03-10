@@ -31,16 +31,13 @@ jobs:
               -H "Accept: application/vnd.github+json"          \
               "/repos/${{ github.repository }}/releases/latest" \
               --silent                                          \
-              --jq .tag_name                                    \
-              || echo "0.1.0"
+              --jq .tag_name
           )
           latest_tag=$(
             gh api                                     \
               -H "Accept: application/vnd.github+json" \
               "/repos/${{ github.repository }}/tags"   \
-              --jq .[0].name                           \
-              --silent                                 \
-              || echo "0.1.0"
+              --jq .[0].name
           )
 
           [ "${latest_gh_release}" == "${latest_tag}" ] && create_release=false
