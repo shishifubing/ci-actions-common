@@ -68,6 +68,23 @@ jobs:
           latest-version: ${{ needs.check_release.outputs.version }}
           release-notes: "## test"
 
+      - name: Generate release notes
+        id: notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api                                                                             \
+            --method POST                                                                    \
+            -H "Accept: application/vnd.github+json"                                         \
+            "/repos/${{ github.repository }}/releases/generate-notes"                        \
+            -f tag_name="${{ needs.check_release.outputs.version }}"                         \
+            -f previous_tag_name="${{ needs.check_release.outputs.latest_release_version }}" \
+            >release_notes.json
+          {
+            echo "name=$(jq -r .name release_notes.json)"
+            echo "body=$(jq -r .body release_notes.json)"
+          } >>"${GITHUB_OUTPUT}"
+
       - name: Import GPG key
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@111c56156bcc6918c056dbef52164cfa583dc549 # v5.2.0
@@ -100,7 +117,7 @@ jobs:
 
       - name: Merge Pull Request
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
         run: |
           gh pr merge                                \
             --auto                                   \
@@ -113,4 +130,5 @@ jobs:
         with:
           token: ${{ github.token }}
           tag_name: ${{ needs.check_release.outputs.version }}
-          generate_release_notes: true
+          name: ${{ steps.notes.outputs.name }}
+          body: ${{ steps.notes.outputs.body }}
