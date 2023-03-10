@@ -45,7 +45,6 @@ jobs:
           body: This PR was automatically generated in ${{ env.JOB_URL }}
           labels: chore, repo, size/m
           signoff: true
-          base: test
           branch: chore/changelog/add-version-${{ github.event.release.tag_name }}
           commit-message: |
             chore(changelog): add ${{ github.event.release.tag_name }}
