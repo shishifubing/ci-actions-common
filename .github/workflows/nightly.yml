@@ -62,13 +62,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
 
-      - name: Create a release
-        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
-        with:
-          token: ${{ github.token }}
-          tag_name: ${{ needs.check_release.outputs.version }}
-          generate_release_notes: true
-
       - name: Update CHANGELOG.md
         uses: stefanzweifel/changelog-updater-action@bbfa2bd8afcc53bf7ec1f01e69a7847d82a8b4c6 # v1
         with:
@@ -106,3 +99,10 @@ jobs:
             --auto                                   \
             --delete-branch                          \
             ${{ steps.pr.outputs.pull-request-url }}
+
+      - name: Create a release
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
+        with:
+          token: ${{ github.token }}
+          tag_name: ${{ needs.check_release.outputs.version }}
+          generate_release_notes: true
