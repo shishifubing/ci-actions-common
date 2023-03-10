@@ -3,6 +3,7 @@
 # [`ci-actions-common`][url-repo]
 
 [![License][badge-license]][url-license]
+[![Nightly][badge-nightly]][url-nightly]
 
 Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
@@ -88,6 +89,7 @@ jobs:
 
 [url-license]: https://github.com/shishifubing/ci-actions-common/blob/main/LICENSE
 [url-repo]: https://github.com/shishifubing/ci-actions-common
+[url-nightly]: https://github.com/shishifubing/ci-actions-common/actions/workflows/nightly.yml
 
 <!-- external links -->
 
@@ -103,3 +105,4 @@ jobs:
 <!-- project badge links -->
 
 [badge-license]: https://img.shields.io/github/license/shishifubing/ci-actions-common.svg
+[badge-nightly]: https://github.com/shishifubing/ci-actions-common/actions/workflows/nightly.yml/badge.svg?branch=main
