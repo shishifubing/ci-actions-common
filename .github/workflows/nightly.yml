@@ -85,5 +85,5 @@ jobs:
         with:
           token: ${{ github.token }}
           tag_name: ${{ needs.prepare.outputs.version }}
-          name: ${{ needs.notes.outputs.name }}
-          body: ${{ needs.notes.outputs.body }}
+          name: ${{ needs.prepare.outputs.name }}
+          body: ${{ needs.prepare.outputs.body }}
