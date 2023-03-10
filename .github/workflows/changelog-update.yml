@@ -4,6 +4,9 @@ on:
   release:
     types: [released]
 
+env:
+  JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -38,24 +41,22 @@ jobs:
           author: ${{ steps.import_gpg.outputs.name }} <${{ steps.import_gpg.outputs.email }}>
           committer: ${{ steps.import_gpg.outputs.name }} <${{ steps.import_gpg.outputs.email }}>
           add-paths: CHANGELOG.md
-          title: Add ${{ needs.check_release.outputs.version }} to CHANGELOG.md [skip ci]
-          body: This PR is automatically generated in ${{ env.JOB_URL }}
+          title: Add ${{ github.event.release.tag_name }} to CHANGELOG.md [skip ci]
+          body: This PR was automatically generated in ${{ env.JOB_URL }}
           labels: chore, repo, size/m
           signoff: true
           base: test
-          branch: chore/changelog/add-version-${{ needs.prepare.outputs.version }}
+          branch: chore/changelog/add-version-${{ github.event.release.tag_name }}
           commit-message: |
-            chore(changelog): add ${{ needs.prepare.outputs.version }}
+            chore(changelog): add ${{ github.event.release.tag_name }}
 
-            skip-checks: true
-            job-url: ${{ env.JOB_URL }}
+            Job-url: ${{ env.JOB_URL }}
 
       - name: Merge Pull Request
         env:
           GH_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
         run: |
           gh pr merge                                \
-            --auto                                   \
             --delete-branch                          \
             --merge                                  \
             ${{ steps.pr.outputs.pull-request-url }}
