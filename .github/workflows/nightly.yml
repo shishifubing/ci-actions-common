@@ -22,6 +22,7 @@ jobs:
         id: check
         run: |
           create_release=true
+
           latest_gh_release=$(
             gh api                                              \
               -H "Accept: application/vnd.github+json"          \
@@ -33,11 +34,11 @@ jobs:
             gh api                                     \
               -H "Accept: application/vnd.github+json" \
               "/repos/${{ github.repository }}/tags"   \
-              --jq .[0].name
+              --jq .[0].name ||
+                echo "0.1.0"
           )
-          if [ "${latest_gh_release}" = "${latest_tag}" ]; then
-            create_release=false
-          fi
+
+          [ "${latest_gh_release}" == "${latest_tag}" ] && create_release=false
 
           {
             echo "create_release=${create_release}"
