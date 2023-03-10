@@ -86,7 +86,6 @@ jobs:
           author: ${{ steps.import_gpg.outputs.name }} <${{ steps.import_gpg.outputs.email }}>
           committer: ${{ steps.import_gpg.outputs.name }} <${{ steps.import_gpg.outputs.email }}>
           add-paths: CHANGELOG.md
-          delete-branch: true
           title: Add ${{ needs.check_release.outputs.version }} to CHANGELOG.md [skip ci]
           body: This PR is automatically generated in ${{ env.JOB_URL }}
           labels: chore, repo, size/m
@@ -106,6 +105,7 @@ jobs:
           gh pr merge                                \
             --auto                                   \
             --delete-branch                          \
+            --merge                                  \
             ${{ steps.pr.outputs.pull-request-url }}
 
       - name: Create a release
