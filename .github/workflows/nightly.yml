@@ -60,9 +60,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          token: ${{ github.token }}
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
 
       - name: Create a release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
@@ -99,6 +97,7 @@ jobs:
           body: This PR is automatically generated in ${{ env.JOB_URL }}
           labels: chore, repo, size/m
           signoff: true
+          base: test
           commit-message: "chore(changelog): add ${{ needs.check_release.outputs.version }}"
 
       - name: Merge Pull Request
