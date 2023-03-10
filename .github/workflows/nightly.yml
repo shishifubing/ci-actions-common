@@ -75,15 +75,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare
     if: needs.prepare.outputs.create_release == 'true'
-    permissions:
-      contents: write
-      pull-requests: write
 
     steps:
       - name: Create a release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
         with:
-          token: ${{ github.token }}
+          # events triggered by GitHub Actions don't trigger GitHub Actions
+          token: ${{ secrets.CI_GITHUB_TOKEN }}
           tag_name: ${{ needs.prepare.outputs.version }}
           name: ${{ needs.prepare.outputs.name }}
           body: ${{ needs.prepare.outputs.body }}
