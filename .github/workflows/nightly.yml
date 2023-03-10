@@ -4,7 +4,6 @@ on:
   schedule:
     # daily at 23:00 UTC
     - cron: 0 23 * * *
-  pull_request:
 
 env:
   JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
