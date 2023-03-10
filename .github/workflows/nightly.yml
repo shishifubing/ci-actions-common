@@ -83,6 +83,7 @@ jobs:
         uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04 # v4.2.3
         with:
           token: ${{ github.token }}
+          author: ${{ steps.import_gpg.outputs.name }} <${{ steps.import_gpg.outputs.email }}>
           committer: ${{ steps.import_gpg.outputs.name }} <${{ steps.import_gpg.outputs.email }}>
           add-paths: CHANGELOG.md
           delete-branch: true
@@ -91,9 +92,16 @@ jobs:
           labels: chore, repo, size/m
           signoff: true
           base: test
-          commit-message: "chore(changelog): add ${{ needs.check_release.outputs.version }}"
+          branch: chore/changelog/add-version-${{ needs.check_release.outputs.version }}
+          commit-message: |
+            chore(changelog): add ${{ needs.check_release.outputs.version }}
+
+            skip-checks: true
+            job-url: ${{ env.JOB_URL }}
 
       - name: Merge Pull Request
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh pr merge                                \
             --auto                                   \
