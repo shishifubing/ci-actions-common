@@ -32,7 +32,6 @@ jobs:
             gh api                                              \
               -H "Accept: application/vnd.github+json"          \
               "/repos/${{ github.repository }}/releases/latest" \
-              --silent                                          \
               --jq .tag_name
           )
           latest_tag=$(
