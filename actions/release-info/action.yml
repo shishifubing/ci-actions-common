@@ -34,7 +34,9 @@ runs:
             --jq .[0].name
         )
 
-        [ "${latest_gh_release}" == "${latest_tag}" ] && create_release=false
+        if [ "${latest_gh_release}" == "${latest_tag}" ]; then
+          create_release=false
+        fi
 
         {
           echo "create_release=${create_release}"
