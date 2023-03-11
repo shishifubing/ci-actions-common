@@ -26,7 +26,6 @@ on:
 
 env:
   CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/release.json
-  CONFIG_JSON_PATH: .github/_release.json
 
 jobs:
   release:
@@ -60,7 +59,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          configuration: ${{ env.CONFIG_JSON_PATH }}
+          configuration: ${{ inputs.config_path }}
           fromTag: ${{ steps.info.outputs.last_version }}
           toTag: ${{ steps.info.outputs.version }}
 
