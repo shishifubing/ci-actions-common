@@ -43,7 +43,7 @@ jobs:
     secrets: inherit
 ```
 
-### [changelog-update]
+### [changelog]
 
 - Get release notes from the latest release
 - Update CHANGELOG.md, sign the commit
@@ -51,13 +51,13 @@ jobs:
 - Merge it
 
 ```yml
-name: changelog-update
+name: changelog
 on:
   release:
     types: [released]
 jobs:
   update:
-    uses: shishifubing/ci-actions-common/.github/workflows/changelog-update.yml@main
+    uses: shishifubing/ci-actions-common/.github/workflows/changelog.yml@main
     secrets: inherit
 ```
 
@@ -171,7 +171,7 @@ jobs:
 [.github/gitversion.yml]: .github/GitVersion.yml
 [labeler-issue-triage]: .github/workflows/labeler-issue-triage.yml
 [labeler-pr-triage]: .github/workflows/labeler-pr-triage.yml
-[changelog-update]: .github/workflows/changelog-update.yml
+[changelog]: .github/workflows/changelog.yml
 [release]: .github/workflows/release.yml
 [action-release]: actions/release-info/action.yml
 
