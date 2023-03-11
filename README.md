@@ -3,7 +3,8 @@
 # [`ci-actions-common`][url-repo]
 
 [![License][badge-license]][url-license]
-[![Nightly][badge-nightly]][url-nightly]
+[![Version][badge-version]][url-version]
+[![Release][badge-release]][url-release]
 
 Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
@@ -25,7 +26,7 @@ Github actions and reusable workflows for [shishifubing][url-owner] repositories
 
 ### [tag]
 
-- Determine current version using [GitVersion][url-gitversion] and 
+- Determine current version using [GitVersion][url-gitversion] and
   [GitVersion action][url-gitversion-action] (GitVersion config - [.github/GitVersion.yml])
 - Create a signed tag
 - Push it
@@ -89,7 +90,8 @@ jobs:
 
 [url-license]: https://github.com/shishifubing/ci-actions-common/blob/main/LICENSE
 [url-repo]: https://github.com/shishifubing/ci-actions-common
-[url-nightly]: https://github.com/shishifubing/ci-actions-common/actions/workflows/nightly.yml
+[url-release]: https://github.com/shishifubing/ci-actions-common/actions/workflows/nightly.yml
+[url-version]: https://github.com/shishifubing/ci-actions-common/releases/latest
 
 <!-- external links -->
 
@@ -105,4 +107,5 @@ jobs:
 <!-- project badge links -->
 
 [badge-license]: https://img.shields.io/github/license/shishifubing/ci-actions-common.svg
-[badge-nightly]: https://github.com/shishifubing/ci-actions-common/actions/workflows/nightly.yml/badge.svg?branch=main
+[badge-release]: https://github.com/shishifubing/ci-actions-common/actions/workflows/release.yml/badge.svg?branch=main
+[badge-version]: https://img.shields.io/github/v/release/shishifubing/ci-actions-common?label=version
