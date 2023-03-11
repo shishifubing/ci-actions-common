@@ -44,6 +44,41 @@ jobs:
     secrets: inherit
 ```
 
+### [changelog-update]
+
+- Get release notes from the latest release
+- Update CHANGELOG.md, sign the commit
+- Create a pull request
+- Merge it
+
+```yml
+name: changelog-update
+on:
+  release:
+    types: [released]
+jobs:
+  update:
+    uses: shishifubing/ci-actions-common/.github/workflows/changelog-update.yml@main
+    secrets: inherit
+```
+
+### [release]
+
+- Get release info
+- Publish a release (if there is a need to)
+
+```yml
+name: release
+on:
+  schedule:
+    # daily at 23:00 UTC
+    - cron: 0 23 * * *
+jobs:
+  update:
+    uses: shishifubing/ci-actions-common/.github/workflows/release.yml@main
+    secrets: inherit
+```
+
 ## Actions
 
 ### [terraform]
@@ -85,6 +120,8 @@ jobs:
 [.github/gitversion.yml]: .github/GitVersion.yml
 [labeler-issue-triage]: .github/workflows/labeler-issue-triage.yml
 [labeler-pr-triage]: .github/workflows/labeler-pr-triage.yml
+[changelog-update]: .github/workflows/changelog-update.yml
+[release]: .github/workflows/release.yml
 
 <!-- project links -->
 
