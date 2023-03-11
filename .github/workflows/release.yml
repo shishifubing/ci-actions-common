@@ -3,6 +3,10 @@ name: release
 on:
   workflow_call:
     inputs:
+      draft:
+        description: whether the release should be a draft
+        type: boolean
+        default: false
       download:
         description: whether to download artifacts
         type: boolean
@@ -59,4 +63,4 @@ jobs:
           name: ${{ steps.info.outputs.version }}
           body: ${{ steps.changelog.outputs.changelog }}
           files: ${{ inputs.files }}
-          draft: true
+          draft: ${[ inputs.draft }}
