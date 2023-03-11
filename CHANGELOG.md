@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## v0.6.20 - 2023-03-11
+
+### Feature
+
+- **release**: use release-changelog-builder-action for releases by @tiandaoburen in [#78](https://github.com/shishifubing/ci-actions-common/pull/78)
+
+### Improvement
+
+- **release**: add ignore_labels by @tiandaoburen in [#84](https://github.com/shishifubing/ci-actions-common/pull/84)
+- **release**: remove useless categories by @tiandaoburen in [#83](https://github.com/shishifubing/ci-actions-common/pull/83)
+- **release**: upload release assets by @tiandaoburen in [#74](https://github.com/shishifubing/ci-actions-common/pull/74)
+
+### Bug Fix
+
+- **changelog-update**: use default PR title by @tiandaoburen in [#79](https://github.com/shishifubing/ci-actions-common/pull/79)
+- **changelog**: add 'skip ci' to the commit message by @tiandaoburen in [#73](https://github.com/shishifubing/ci-actions-common/pull/73)
+- **changelog**: do not automerge pr by @tiandaoburen in [#75](https://github.com/shishifubing/ci-actions-common/pull/75)
+- **changelog**: remove 'skip ci' from commit message by @tiandaoburen in [#77](https://github.com/shishifubing/ci-actions-common/pull/77)
+- **release**: set correct action branch by @tiandaoburen in [#82](https://github.com/shishifubing/ci-actions-common/pull/82)
+- **workflows**: add on.workflow_call to release and changelog workflows by @tiandaoburen in [#70](https://github.com/shishifubing/ci-actions-common/pull/70)
+- **workflows**: replace hashes with branches, automerge PRs by @tiandaoburen in [#76](https://github.com/shishifubing/ci-actions-common/pull/76)
+- **workflows**: replace tags with hashes by @tiandaoburen in [#69](https://github.com/shishifubing/ci-actions-common/pull/69)
+
+### Documentation
+
+- **readme**: add info about release-info action by @tiandaoburen in [#71](https://github.com/shishifubing/ci-actions-common/pull/71)
+
+**Full Changelog**: https://github.com/shishifubing/ci-actions-common/compare/v0.1.28...v0.6.20
+
 ## v0.6.1 - 2023-03-11
 
 <!-- Release notes generated using configuration in .github/release.yml at v0.6.1 -->
