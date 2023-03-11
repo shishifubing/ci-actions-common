@@ -1,0 +1,65 @@
+name: release-info
+description: get release info
+
+outputs:
+  name:
+    description: release name
+    value: ${{ steps.notes.outputs.name }}
+  body:
+    description: body of release notes
+    value: ${{ steps.notes.outputs.body }}
+  version:
+    description: release version
+    value: ${{ steps.check.outputs.version }}
+  create:
+    description: whether there is a need to create a new release
+    value: ${{ steps.check.outputs.create_release
+
+runs:
+  using: composite
+  steps:
+    - name: Check latest release
+      shell: sh
+      id: check
+      run: |
+        create_release=true
+
+        latest_gh_release=$(
+          gh release view --json tagName --jq .tagName --repo "${{ github.repository }}"
+        )
+        latest_tag=$(
+          gh api                                     \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${{ github.repository }}/tags"   \
+            --jq .[0].name
+        )
+
+        [ "${latest_gh_release}" == "${latest_tag}" ] && create_release=false
+
+        {
+          echo "create_release=${create_release}"
+          echo "latest_release_version=${latest_gh_release}"
+          echo "version=${latest_tag}"
+        } >>"${GITHUB_OUTPUT}"
+
+    - name: Generate release notes
+      id: notes
+      if: steps.check.outputs.create_release == 'true'
+      shell: sh
+      run: |
+        tag='${{ steps.check.outputs.version }}'
+        previous_tag='${{ steps.check.outputs.latest_release_version }}'
+        gh api                                                      \
+          --method POST                                             \
+          -H "Accept: application/vnd.github+json"                  \
+          "/repos/${{ github.repository }}/releases/generate-notes" \
+          -f tag_name="${tag}"                                      \
+          -f previous_tag_name="${previous_tag}"                    \
+          >release_notes.json
+
+        {
+          echo "name=$(jq -r .name release_notes.json)"
+          echo "body<<EOF"
+          jq -r .body release_notes.json
+          echo "EOF"
+        } >>"${GITHUB_OUTPUT}"
