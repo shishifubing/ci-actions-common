@@ -43,13 +43,13 @@ jobs:
           author: ${{ steps.import_gpg.outputs.name }} <${{ steps.import_gpg.outputs.email }}>
           committer: ${{ steps.import_gpg.outputs.name }} <${{ steps.import_gpg.outputs.email }}>
           add-paths: CHANGELOG.md
-          title: Add ${{ github.event.release.tag_name }} to CHANGELOG.md [skip ci]
+          title: Add ${{ github.event.release.tag_name }} to CHANGELOG.md
           body: This PR was automatically generated in ${{ env.JOB_URL }}
           labels: chore, repo, size/m
           signoff: true
           branch: chore/changelog/add-version-${{ github.event.release.tag_name }}
           commit-message: |
-            chore(changelog): add ${{ github.event.release.tag_name }} [skip ci]
+            chore(changelog): add ${{ github.event.release.tag_name }}
 
             Job-url: ${{ env.JOB_URL }}
 
