@@ -3,6 +3,7 @@ name: changelog-update
 on:
   release:
     types: [released]
+  workflow_dispatch:
 
 env:
   JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
