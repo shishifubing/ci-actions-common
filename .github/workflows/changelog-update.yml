@@ -10,6 +10,7 @@ env:
 
 jobs:
   update:
+    name: Update CHANGELOG.md
     runs-on: ubuntu-latest
 
     steps:
