@@ -1,4 +1,4 @@
-# This is a config for https://github.com/marketplace/stale
+# Config for https://github.com/marketplace/stale
 
 # Number of days of inactivity before an issue becomes stale
 daysUntilStale: 30
