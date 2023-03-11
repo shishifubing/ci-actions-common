@@ -1,0 +1,76 @@
+{
+  "categories": [
+    {
+      "title": "## Breaking Change",
+      "labels": [
+        "break"
+      ]
+    },
+    {
+      "title": "## Feature",
+      "labels": [
+        "feat"
+      ]
+    },
+    {
+      "title": "## Improvement",
+      "labels": [
+        "improve"
+      ]
+    },
+    {
+      "title": "## Bug Fix",
+      "labels": [
+        "fix"
+      ]
+    },
+    {
+      "title": "## Automation",
+      "labels": [
+        "ci",
+        "cd",
+        "github-actions"
+      ]
+    },
+    {
+      "title": "## Documentation",
+      "labels": [
+        "docs"
+      ]
+    },
+    {
+      "title": "## Test",
+      "labels": [
+        "test"
+      ]
+    },
+    {
+      "title": "## Build",
+      "labels": [
+        "build"
+      ]
+    }
+  ],
+  "sort": {
+    "order": "ASC",
+    "on_property": "title"
+  },
+  "template": "${{CHANGELOG}}",
+  "pr_template": "- ${{TITLE}} - [#${{NUMBER}}](${{URL}})",
+  "empty_template": "- no noteworthy changes",
+  "label_extractor": [
+    {
+      "pattern": "([^\\(]+)\\(.+\\): .+",
+      "on_property": "title",
+      "target": "$1"
+    }
+  ],
+  "transformers": [
+    {
+      "pattern": "([^\\(]+)\\(?([^\\)]+)?\\)?: (.+)",
+      "target": "- **$2:** $3"
+    }
+  ],
+  "max_pull_requests": 100,
+  "max_back_track_time_days": 7
+}
