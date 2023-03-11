@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v0.6.1 - 2023-03-11
+
+<!-- Release notes generated using configuration in .github/release.yml at v0.6.1 -->
+### What's Changed
+
+#### Documentation
+
+- Add v0.1.30 to CHANGELOG.md [skip ci] by @shishifubing-bot in https://github.com/shishifubing/ci-actions-common/pull/64
+- Add release action by @tiandaoburen in https://github.com/shishifubing/ci-actions-common/pull/65
+
+#### Automation
+
+- Fix 'if' in release workflow by @tiandaoburen in https://github.com/shishifubing/ci-actions-common/pull/66
+
+**Full Changelog**: https://github.com/shishifubing/ci-actions-common/compare/v0.1.30...v0.6.1
+
 ## v0.1.30 - 2023-03-10
 
 <!-- Release notes generated using configuration in .github/release.yml at v0.1.30 -->
