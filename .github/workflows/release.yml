@@ -1,15 +1,13 @@
 name: release
 
 on:
-  schedule:
-    # daily at 23:00 UTC
-    - cron: 0 23 * * *
   workflow_dispatch:
   workflow_call:
     inputs:
       files: 
         description: regex describing which artifacts are to be included in the release
         type: string
+        default: "**/*"
 
 env:
   ARTIFACTS_DIR: _artifacts
@@ -41,4 +39,4 @@ jobs:
           tag_name: ${{ steps.info.outputs.version }}
           name: ${{ steps.info.outputs.name }}
           body: ${{ steps.info.outputs.body }}
-          files: ${{ env.ARTIFACTS_DIR }}/${{ inputs.files || '**/*' }}
+          files: ${{ env.ARTIFACTS_DIR }}/${{ inputs.files }}
