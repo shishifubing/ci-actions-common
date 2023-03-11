@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           fetch-depth: 0
           token: ${{ secrets.CI_GITHUB_TOKEN }}
@@ -35,22 +35,19 @@ jobs:
           wget "${GITVERSION_CONFIG_URL}"
 
       - name: Download gitversion
-        # v0.9.15 https://github.com/GitTools/actions/releases
-        uses: gittools/actions/gitversion/setup@31b3198b2de324472547fecec2c0f721b70c38e2
+        uses: gittools/actions/gitversion/setup@31b3198b2de324472547fecec2c0f721b70c38e2 # v0.9.15
         with:
           versionSpec: 5.12.0
 
       - name: Determine version
         id: gitversion
-        # v0.9.15 https://github.com/GitTools/actions/releases
-        uses: gittools/actions/gitversion/execute@31b3198b2de324472547fecec2c0f721b70c38e2
+        uses: gittools/actions/gitversion/execute@31b3198b2de324472547fecec2c0f721b70c38e2 # v0.9.15
         with:
           useConfigFile: true
 
       - name: Import GPG key
         id: import_gpg
-        # v5.2.0 https://github.com/crazy-max/ghaction-import-gpg/releases
-        uses: crazy-max/ghaction-import-gpg@111c56156bcc6918c056dbef52164cfa583dc549
+        uses: crazy-max/ghaction-import-gpg@111c56156bcc6918c056dbef52164cfa583dc549 # v5.2.0
         with:
           gpg_private_key: ${{ secrets.CI_GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.CI_GPG_PASSPHRASE }}
