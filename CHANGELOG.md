@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v0.6.26 - 2023-03-11
+
+### Feature
+
+- **required**: create pr-title-lint workfllow by @tiandaoburen in [#89](https://github.com/shishifubing/ci-actions-common/pull/89)
+
+### Bug Fix
+
+- **changelog**: specify title of PR by @tiandaoburen in [#90](https://github.com/shishifubing/ci-actions-common/pull/90)
+- **pr-title-lint**: remove on.pull_request_target by @tiandaoburen in [#91](https://github.com/shishifubing/ci-actions-common/pull/91)
+
+**Full Changelog**: https://github.com/shishifubing/ci-actions-common/compare/v0.6.20...v0.6.26
+
 ## v0.6.20 - 2023-03-11
 
 ### Feature
