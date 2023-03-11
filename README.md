@@ -39,7 +39,7 @@ on:
       - main
 jobs:
   tag:
-    uses: shishifubing/ci-actions-common/.github/workflows/tag.yml@a8a103959a5947d3914ceb6b779ecc982dff62b8 # v0.1.30
+    uses: shishifubing/ci-actions-common/.github/workflows/tag.yml@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
     secrets: inherit
 ```
 
@@ -57,7 +57,7 @@ on:
     types: [released]
 jobs:
   update:
-    uses: shishifubing/ci-actions-common/.github/workflows/changelog-update.yml@a8a103959a5947d3914ceb6b779ecc982dff62b8 # v0.1.30
+    uses: shishifubing/ci-actions-common/.github/workflows/changelog-update.yml@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
     secrets: inherit
 ```
 
@@ -74,7 +74,7 @@ on:
     - cron: 0 23 * * *
 jobs:
   update:
-    uses: shishifubing/ci-actions-common/.github/workflows/release.yml@a8a103959a5947d3914ceb6b779ecc982dff62b8 # v0.1.30
+    uses: shishifubing/ci-actions-common/.github/workflows/release.yml@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
     secrets: inherit
 ```
 
@@ -99,7 +99,7 @@ jobs:
       image: hashicorp/terraform:1.3.7
     steps:
       - name: Run terraform
-        uses: shishifubing/ci-actions-common/actions/terraform@a8a103959a5947d3914ceb6b779ecc982dff62b8 # v0.1.30
+        uses: shishifubing/ci-actions-common/actions/terraform@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
         with:
           working_directory: cloud/yandex
         env:
