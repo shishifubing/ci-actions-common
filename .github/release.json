@@ -1,5 +1,4 @@
 {
-  // config for https://github.com/mikepenz/release-changelog-builder-action
   "categories": [
     {
       "title": "## Breaking Change",
