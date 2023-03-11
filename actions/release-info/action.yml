@@ -13,7 +13,7 @@ outputs:
     value: ${{ steps.check.outputs.version }}
   create:
     description: whether there is a need to create a new release
-    value: ${{ steps.check.outputs.create_release
+    value: ${{ steps.check.outputs.create_release }}
 
 runs:
   using: composite
