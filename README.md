@@ -126,7 +126,7 @@ jobs:
 
 [url-license]: https://github.com/shishifubing/ci-actions-common/blob/main/LICENSE
 [url-repo]: https://github.com/shishifubing/ci-actions-common
-[url-release]: https://github.com/shishifubing/ci-actions-common/actions/workflows/nightly.yml
+[url-release]: https://github.com/shishifubing/ci-actions-common/actions/workflows/release.yml
 [url-version]: https://github.com/shishifubing/ci-actions-common/releases/latest
 
 <!-- external links -->
