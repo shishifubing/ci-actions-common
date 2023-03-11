@@ -22,10 +22,10 @@ on:
       config_path:
         description: changelog config path
         type: string
-        default: .github/release.yml
+        default: .github/release.json
 
 env:
-  CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/release.yml
+  CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/release.json
   CONFIG_JSON_PATH: .github/_release.json
 
 jobs:
@@ -40,16 +40,6 @@ jobs:
       - name: Get changelog config
         id: config
         run: test -f "${{ inputs.config_path }}" || curl -sSLo "${{ inputs.config_path }}" "${CONFIG_URL}"
-    
-      - name: Convert config to json
-        uses: actions/github-script@v6
-        id: set-result
-        with:
-          script: |
-            yaml = require('js-yaml')
-            fs = require('fs')
-            obj = yaml.load(fs.readFileSync('${{ inputs.config_path }}', {encoding: 'utf-8'}))
-            fs.writeFileSync('${{ env.CONFIG_JSON_PATH }}', JSON.stringify(obj, null, 2))
     
       - name: Download artifacts
         uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
