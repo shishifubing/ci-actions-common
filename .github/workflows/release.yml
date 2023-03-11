@@ -3,10 +3,18 @@ name: release
 on:
   workflow_call:
     inputs:
+      download:
+        description: whether to download artifacts
+        type: boolean
+        default: false
       files:
         description: regex describing which artifacts are to be included in the release
         type: string
         default: _artifacts/**/*
+      download_path:
+        description: path for artifacts
+        type: string
+        default: _artifacts
 
 jobs:
   release:
@@ -16,8 +24,9 @@ jobs:
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        if: inputs.download
         with:
-          path: _artifacts
+          path: ${{ inputs.download_path }}
 
       - name: Get release info
         id: info
