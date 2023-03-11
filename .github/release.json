@@ -35,6 +35,10 @@
     "order": "ASC",
     "on_property": "title"
   },
+  "ignore_labels": [
+      "ignore",
+      "chore"
+  ],
   "template": "${{CHANGELOG}}\n**Full Changelog**: ${{RELEASE_DIFF}}",
   "pr_template": "- ${{TITLE}} by @${{AUTHOR}} in [#${{NUMBER}}](${{URL}})",
   "empty_template": "- no noteworthy changes",
