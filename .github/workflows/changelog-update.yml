@@ -60,5 +60,4 @@ jobs:
           gh pr merge                                \
             --delete-branch                          \
             --merge                                  \
-            --auto                                   \
             ${{ steps.pr.outputs.pull-request-url }}
