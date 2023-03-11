@@ -39,7 +39,7 @@ on:
       - main
 jobs:
   tag:
-    uses: shishifubing/ci-actions-common/.github/workflows/tag.yml@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
+    uses: shishifubing/ci-actions-common/.github/workflows/tag.yml@main
     secrets: inherit
 ```
 
@@ -57,7 +57,7 @@ on:
     types: [released]
 jobs:
   update:
-    uses: shishifubing/ci-actions-common/.github/workflows/changelog-update.yml@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
+    uses: shishifubing/ci-actions-common/.github/workflows/changelog-update.yml@main
     secrets: inherit
 ```
 
@@ -75,7 +75,7 @@ on:
     - cron: 0 23 * * *
 jobs:
   update:
-    uses: shishifubing/ci-actions-common/.github/workflows/release.yml@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
+    uses: shishifubing/ci-actions-common/.github/workflows/release.yml@main
     secrets: inherit
     with:
       download: true
@@ -102,7 +102,7 @@ jobs:
       image: hashicorp/terraform:1.3.7
     steps:
       - name: Run terraform
-        uses: shishifubing/ci-actions-common/actions/terraform@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
+        uses: shishifubing/ci-actions-common/actions/terraform@main
         with:
           working_directory: cloud/yandex
         env:
@@ -141,7 +141,7 @@ jobs:
     steps:
       - name: Get release info
         id: info
-        uses: shishifubing/ci-actions-common/actions/release-info@48ce595debac2eb5f2fb18ed3e86ea01f1ea23ca # v0.6.5
+        uses: shishifubing/ci-actions-common/actions/release-info@main
         env:
           GH_TOKEN: ${{ github.token }}
 
