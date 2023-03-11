@@ -19,6 +19,13 @@ on:
         description: path for artifacts
         type: string
         default: _artifacts
+      config_path:
+        description: changelog config path
+        type: string
+        default: .github/release.yml
+
+env:
+  CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/release.yml
 
 jobs:
   release:
@@ -28,6 +35,19 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+        
+      - name: Get changelog config
+        id: config
+        run: |
+          if [ ! -f "${{ inputs.config_path }}" ]; then
+            curl -sSLo "${{ inputs.config_path }}" "${CONFIG_URL}"
+          fi
+          
+          {
+            echo "config<<EOF"
+            cat "${{ inputs.config_path }}"
+            echo "EOF"
+          } >>"${GITHUB_OUTPUT}"
     
       - name: Download artifacts
         uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -41,14 +61,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-      - name: Build GitHub Release changelog
+      - name: Build changelog
         id: changelog
         if: steps.info.outputs.create == 'true'
         uses: mikepenz/release-changelog-builder-action@c73ff7421c59fa0d090dcfe62e24a758977c699d # v3.7.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          configuration: .github/release.yml
+          # I'm using outputs here because the action does not support yaml configs
+          configuration: ${{ toJSON(steps.config.outputs.config) }}
           fromTag: ${{ steps.info.outputs.last_version }}
           toTag: ${{ steps.info.outputs.version }}
 
