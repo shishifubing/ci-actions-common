@@ -25,7 +25,7 @@ on:
         default: .github/release.yml
 
 env:
-  CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/release.yml
+  CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/release.json
 
 jobs:
   release:
@@ -38,16 +38,7 @@ jobs:
         
       - name: Get changelog config
         id: config
-        run: |
-          if [ ! -f "${{ inputs.config_path }}" ]; then
-            curl -sSLo "${{ inputs.config_path }}" "${CONFIG_URL}"
-          fi
-          
-          {
-            echo "config<<EOF"
-            cat "${{ inputs.config_path }}"
-            echo "EOF"
-          } >>"${GITHUB_OUTPUT}"
+        run: test -f "${{ inputs.config_path }}" || curl -sSLo "${{ inputs.config_path }}" "${CONFIG_URL}"
     
       - name: Download artifacts
         uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
@@ -68,8 +59,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          # I'm using outputs here because the action does not support yaml configs
-          configuration: ${{ toJSON(steps.config.outputs.config) }}
+          configuration: ${{ inputs.config_path }}
           fromTag: ${{ steps.info.outputs.last_version }}
           toTag: ${{ steps.info.outputs.version }}
 
