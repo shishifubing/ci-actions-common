@@ -39,7 +39,6 @@ on:
       - main
 jobs:
   tag:
-    name: Call a workflow
     uses: shishifubing/ci-actions-common/.github/workflows/tag.yml@main
     secrets: inherit
 ```
