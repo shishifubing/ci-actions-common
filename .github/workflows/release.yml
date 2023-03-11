@@ -54,7 +54,7 @@ jobs:
 
       - name: Create a release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
-        if: steps.changelog.outputs.changelog != ''
+        if: steps.info.outputs.create == 'true'
         with:
           # events triggered by GitHub Actions don't trigger GitHub Actions, so
           # you need to pass custom token to trigger changelog workflow
