@@ -1,6 +1,11 @@
 name: release-info
 description: get release info
 
+inputs:
+  generate:
+    descrpiption: whether to generate default release notes
+    type: boolean
+
 outputs:
   name:
     description: release name
@@ -11,6 +16,9 @@ outputs:
   version:
     description: release version
     value: ${{ steps.check.outputs.version }}
+  last_version:
+    description: last release version
+    value: ${{ steps.check.outputs.latest_release_version }}
   create:
     description: whether there is a need to create a new release
     value: ${{ steps.check.outputs.create_release }}
@@ -46,7 +54,7 @@ runs:
 
     - name: Generate release notes
       id: notes
-      if: steps.check.outputs.create_release == 'true'
+      if: inputs.generate && steps.check.outputs.create_release == 'true'
       shell: sh
       run: |
         tag='${{ steps.check.outputs.version }}'
