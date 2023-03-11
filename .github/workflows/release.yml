@@ -1,11 +1,20 @@
 name: release
 
 on:
-  schedule:
-    # daily at 23:00 UTC
-    - cron: 0 23 * * *
-  workflow_dispatch:
   workflow_call:
+    inputs:
+      download:
+        description: whether to download artifacts
+        type: boolean
+        default: false
+      files:
+        description: regex describing which artifacts are to be included in the release
+        type: string
+        default: _artifacts/**/*
+      download_path:
+        description: path for artifacts
+        type: string
+        default: _artifacts
 
 jobs:
   release:
@@ -13,6 +22,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        if: inputs.download
+        with:
+          path: ${{ inputs.download_path }}
+
       - name: Get release info
         id: info
         uses: shishifubing/ci-actions-common/actions/release-info@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
@@ -29,3 +44,4 @@ jobs:
           tag_name: ${{ steps.info.outputs.version }}
           name: ${{ steps.info.outputs.name }}
           body: ${{ steps.info.outputs.body }}
+          files: ${{ inputs.files }}
