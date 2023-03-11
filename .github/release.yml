@@ -1,32 +1,36 @@
 changelog:
-  exclude:
-    labels:
-      - dependencies
-      - chore
-    authors:
-      - dependabot
-
   categories:
     - title: New Features
       labels:
         - enhancement
+        - feat
+        - feature
 
     - title: Bug Fixes
       labels:
         - bug
+        - fix
 
     - title: Documentation
       labels:
         - documentation
-
-    - title: Dependencies
-      labels:
-        - dependencies
+        - docs
 
     - title: Breaking Changes
       labels:
         - breaking-change
 
+    - title: Automation
+      labels:
+        - ci
+        - cd
+        - github-actions
+        - automation
+
     - title: Other Changes
       labels:
         - "*"
+
+    - title: Dependencies
+      labels:
+        - dependencies
