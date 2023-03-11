@@ -63,8 +63,9 @@ jobs:
 
 ### [release]
 
+- Download artifacts
 - Get release info
-- Publish a release (if there is a need to)
+- Publish a release (if there is an unreleased tag)
 
 ```yml
 name: release
@@ -76,6 +77,8 @@ jobs:
   update:
     uses: shishifubing/ci-actions-common/.github/workflows/release.yml@f863ce302be8dd9b0a5a4245b50858b07b4066bf # v0.6.1
     secrets: inherit
+    with:
+      download: true
 ```
 
 ## Actions
@@ -141,7 +144,7 @@ jobs:
         uses: shishifubing/ci-actions-common/actions/release-info@48ce595debac2eb5f2fb18ed3e86ea01f1ea23ca # v0.6.5
         env:
           GH_TOKEN: ${{ github.token }}
-          
+
       - name: Download artifacts
         uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with:
