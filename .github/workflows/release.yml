@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+    
       - name: Download artifacts
         uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         if: inputs.download
@@ -30,18 +33,30 @@ jobs:
 
       - name: Get release info
         id: info
-        uses: shishifubing/ci-actions-common/actions/release-info@main
+        uses: shishifubing/ci-actions-common/actions/release-info@tiandaoburen-patch-1
         env:
           GH_TOKEN: ${{ github.token }}
 
+      - name: Build GitHub Release changelog
+        id: changelog
+        if: steps.info.outputs.create == 'true'
+        uses: mikepenz/release-changelog-builder-action@c73ff7421c59fa0d090dcfe62e24a758977c699d # v3.7.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          configuration: .github/release.yml
+          fromTag: ${{ steps.info.outputs.last_version }}
+          toTag: ${{ steps.info.outputs.version }}
+
       - name: Create a release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
-        if: steps.info.outputs.create == 'true'
+        if: steps.changelog.outputs.changelog != ''
         with:
           # events triggered by GitHub Actions don't trigger GitHub Actions, so
           # you need to pass custom token to trigger changelog workflow
           token: ${{ secrets.CI_GITHUB_TOKEN }}
           tag_name: ${{ steps.info.outputs.version }}
-          name: ${{ steps.info.outputs.name }}
-          body: ${{ steps.info.outputs.body }}
+          name: ${{ steps.info.outputs.version }}
+          body: ${{ steps.changelog.outputs.changelog }}
           files: ${{ inputs.files }}
+          draft: true
