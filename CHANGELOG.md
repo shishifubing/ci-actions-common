@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.0.2 - 2023-03-12
+
+### Breaking Change
+
+- feat(- ****: rename workflows by @tiandaoburen in [#94](https://github.com/shishifubing/ci-actions-common/pull/94)
+
+### Feature
+
+- **release-info**: create reusable workflow by @tiandaoburen in [#93](https://github.com/shishifubing/ci-actions-common/pull/93)
+
+**Full Changelog**: https://github.com/shishifubing/ci-actions-common/compare/v0.6.26...v1.0.2
+
 ## v0.6.26 - 2023-03-11
 
 ### Feature
