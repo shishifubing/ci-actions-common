@@ -1,26 +1,26 @@
-name: release-info
+name: reuse-release-info
 
 on:
   workflow_call:
     outputs:
       name:
         description: release name
-        value: ${{ jobs.release_info.outputs.name }}
+        value: ${{ jobs.info.outputs.name }}
       body:
         description: body of release notes
-        value: ${{ jobs.release_info.outputs.body }}
+        value: ${{ jobs.info.outputs.body }}
       version:
         description: release version
-        value: ${{ jobs.release_info.outputs.version }}
+        value: ${{ jobs.info.outputs.version }}
       last_version:
         description: last release version
-        value: ${{ jobs.release_info.outputs.last_version }}
+        value: ${{ jobs.info.outputs.last_version }}
       create:
         description: whether there is a need to create a new release
-        value: ${{ jobs.release_info.outputs.create }}
+        value: ${{ jobs.info.outputs.create }}
 
 jobs:
-  release_info:
+  info:
     name: Get release info
     runs-on: ubuntu-latest
     outputs:
