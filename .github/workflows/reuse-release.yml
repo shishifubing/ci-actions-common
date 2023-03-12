@@ -1,4 +1,4 @@
-name: release
+name: reuse-release
 
 on:
   workflow_call:
