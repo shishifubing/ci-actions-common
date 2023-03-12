@@ -1,0 +1,77 @@
+name: reuse-release
+
+on:
+  workflow_call:
+    inputs:
+      draft:
+        description: whether the release should be a draft
+        type: boolean
+        default: false
+      download:
+        description: whether to download artifacts
+        type: boolean
+        default: false
+      files:
+        description: regex describing which artifacts are to be included in the release
+        type: string
+        default: _artifacts/**/*
+      download_path:
+        description: path for artifacts
+        type: string
+        default: _artifacts
+      config_path:
+        description: changelog config path
+        type: string
+        default: .github/release.json
+
+env:
+  CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/release.json
+
+jobs:
+  release:
+    name: Publish a release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+        
+      - name: Get changelog config
+        id: config
+        run: test -f "${{ inputs.config_path }}" || curl -sSLo "${{ inputs.config_path }}" "${CONFIG_URL}"
+    
+      - name: Download artifacts
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
+        if: inputs.download
+        with:
+          path: ${{ inputs.download_path }}
+
+      - name: Get release info
+        id: info
+        uses: shishifubing/ci-actions-common/actions/release-info@main
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Build changelog
+        id: changelog
+        if: steps.info.outputs.create == 'true'
+        uses: mikepenz/release-changelog-builder-action@c73ff7421c59fa0d090dcfe62e24a758977c699d # v3.7.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          configuration: ${{ inputs.config_path }}
+          fromTag: ${{ steps.info.outputs.last_version }}
+          toTag: ${{ steps.info.outputs.version }}
+
+      - name: Create release
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
+        if: steps.changelog.outputs.categorized_prs != '0'
+        with:
+          # events triggered by GitHub Actions don't trigger GitHub Actions, so
+          # you need to pass custom token to trigger changelog workflow
+          token: ${{ secrets.CI_GITHUB_TOKEN }}
+          tag_name: ${{ steps.info.outputs.version }}
+          name: ${{ steps.info.outputs.version }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          files: ${{ inputs.files }}
+          draft: ${{ inputs.draft }}

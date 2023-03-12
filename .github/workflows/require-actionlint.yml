@@ -1,7 +1,7 @@
-name: required / actionlint
+name: require-actionlint
 
 on:
-  pull_request:
+  pull_request_target:
 
 env:
   # v1.6.23 https://github.com/rhysd/actionlint/releases
