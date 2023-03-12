@@ -7,4 +7,4 @@ on:
 jobs:
   tag:
     name: reuse-tag
-    uses: ./.github/workflows/reuse-tag
+    uses: ./.github/workflows/reuse-tag.yml
