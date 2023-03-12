@@ -1,9 +1,6 @@
-name: tag
+name: reuse-tag
 
 on:
-  push:
-    branches:
-      - main
   workflow_call:
     outputs:
       semVer:
