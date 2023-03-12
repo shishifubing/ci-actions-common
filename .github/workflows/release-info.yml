@@ -1,0 +1,38 @@
+name: release-info
+
+on:
+  workflow_call:
+    outputs:
+      name:
+        description: release name
+        value: ${{ jobs.release_info.outputs.name }}
+      body:
+        description: body of release notes
+        value: ${{ jobs.release_info.outputs.body }}
+      version:
+        description: release version
+        value: ${{ jobs.release_info.outputs.version }}
+      last_version:
+        description: last release version
+        value: ${{ jobs.release_info.outputs.last_version }}
+      create:
+        description: whether there is a need to create a new release
+        value: ${{ jobs.release_info.outputs.create }}
+
+jobs:
+  release_info:
+    name: Get release info
+    runs-on: ubuntu-latest
+    outputs:
+      name: ${{ steps.notes.outputs.name }}
+      body: ${{ steps.notes.outputs.body }}
+      version: ${{ steps.check.outputs.version }}
+      last_version: ${{ steps.check.outputs.latest_release_version }}
+      create: ${{ steps.check.outputs.create_release }}
+
+    steps:
+      - name: Get release info
+        id: info
+        uses: shishifubing/ci-actions-common/actions/release-info@main
+        env:
+          GH_TOKEN: ${{ github.token }}
