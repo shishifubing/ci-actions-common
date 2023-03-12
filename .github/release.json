@@ -1,19 +1,19 @@
 {
   "categories": [
     {
-      "title": "## Breaking Change",
+      "title": "## BREAKING CHANGES",
       "labels": [
         "break"
       ]
     },
     {
-      "title": "## Feature",
+      "title": "## Features",
       "labels": [
         "feat"
       ]
     },
     {
-      "title": "## Bug Fix",
+      "title": "## Bug Fixes",
       "labels": [
         "fix"
       ]
