@@ -8,5 +8,6 @@ on:
 
 jobs:
   release:
+    name: reuse-release
     uses: ./.github/workflows/reuse-release.yml
     secrets: inherit
