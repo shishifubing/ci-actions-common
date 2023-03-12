@@ -196,5 +196,5 @@ jobs:
 <!-- project badge links -->
 
 [badge-license]: https://img.shields.io/github/license/shishifubing/ci-actions-common.svg
-[badge-release]: https://github.com/shishifubing/ci-actions-common/actions/workflows/release.yml/badge.svg?branch=main
+[badge-release]: https://img.shields.io/github/actions/workflow/status/shishifubing/ci-actions-common/release.yml?branch=main&label=release&logo=github
 [badge-version]: https://img.shields.io/github/v/release/shishifubing/ci-actions-common?label=version
