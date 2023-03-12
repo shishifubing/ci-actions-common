@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v1.2.1 - 2023-03-12
+
+### Features
+
+- **required**: add concurrency to required workflows by @tiandaoburen in [#100](https://github.com/shishifubing/ci-actions-common/pull/100)
+
+### Bug Fixes
+
+- **release**: emphasize breaking changes in changelog by @tiandaoburen in [#99](https://github.com/shishifubing/ci-actions-common/pull/99)
+- **required**: fix concurrency group names by @tiandaoburen in [#101](https://github.com/shishifubing/ci-actions-common/pull/101)
+
+**Full Changelog**: https://github.com/shishifubing/ci-actions-common/compare/v1.0.2...v1.2.1
+
 ## v1.0.2 - 2023-03-12
 
 ### Breaking Change
