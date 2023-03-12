@@ -24,11 +24,11 @@ jobs:
     name: Get release info
     runs-on: ubuntu-latest
     outputs:
-      name: ${{ steps.notes.outputs.name }}
-      body: ${{ steps.notes.outputs.body }}
-      version: ${{ steps.check.outputs.version }}
-      last_version: ${{ steps.check.outputs.latest_release_version }}
-      create: ${{ steps.check.outputs.create_release }}
+      name: ${{ steps.info.outputs.name }}
+      body: ${{ steps.info.outputs.body }}
+      version: ${{ steps.info.outputs.version }}
+      last_version: ${{ steps.info.outputs.last_version }}
+      create: ${{ steps.info.outputs.create }}
 
     steps:
       - name: Get release info
