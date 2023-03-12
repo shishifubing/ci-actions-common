@@ -6,6 +6,10 @@ on:
 permissions:
   pull-requests: write
 
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.action }}-${{ github.head_ref || github.run_id }}
+
 jobs:
   type:
     name: Add type labels
