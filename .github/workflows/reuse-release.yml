@@ -26,6 +26,7 @@ on:
 
 env:
   CONFIG_URL: https://raw.githubusercontent.com/shishifubing/ci-actions-common/main/.github/release.json
+  JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
 jobs:
   release:
@@ -72,6 +73,9 @@ jobs:
           token: ${{ secrets.CI_GITHUB_TOKEN }}
           tag_name: ${{ steps.info.outputs.version }}
           name: ${{ steps.info.outputs.version }}
-          body: ${{ steps.changelog.outputs.changelog }}
+          body: |
+            <!-- Automatically generated in ${{ env.JOB_URL }} -->
+            
+            ${{ steps.changelog.outputs.changelog }}
           files: ${{ inputs.files }}
           draft: ${{ inputs.draft }}
