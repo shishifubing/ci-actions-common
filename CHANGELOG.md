@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## v1.7.0 - 2023-03-13
+
+<!-- Automatically generated in https://github.com/shishifubing/ci-actions-common/actions/runs/4410436155 -->
+### Features
+
+- **labeler-pr-triage**: use CI token instead of the default one by @tiandaoburen in [#105](https://github.com/shishifubing/ci-actions-common/pull/105)
+- **labeler-pr-triage**: use default token by @tiandaoburen in [#106](https://github.com/shishifubing/ci-actions-common/pull/106)
+- **release**: add 'Other changes' section to release notes by @tiandaoburen in [#103](https://github.com/shishifubing/ci-actions-common/pull/103)
+- **release**: add a link to the origin job to release notes by @tiandaoburen in [#110](https://github.com/shishifubing/ci-actions-common/pull/110)
+- **release**: remove 'Other changes' section from release notes by @tiandaoburen in [#104](https://github.com/shishifubing/ci-actions-common/pull/104)
+
+### Bug Fixes
+
+- **actionlint**: replace on.pull_request_target with on.pull_request by @tiandaoburen in [#109](https://github.com/shishifubing/ci-actions-common/pull/109)
+- **labeler-pr-triage**: do not run the workflow if a config doesn't exist by @tiandaoburen in [#107](https://github.com/shishifubing/ci-actions-common/pull/107)
+- **labeler-pr-triage**: fix existence check by @tiandaoburen in [#108](https://github.com/shishifubing/ci-actions-common/pull/108)
+
+**Full Changelog**: https://github.com/shishifubing/ci-actions-common/compare/v1.2.1...v1.7.0
+
 ## v1.2.1 - 2023-03-12
 
 ### Features
