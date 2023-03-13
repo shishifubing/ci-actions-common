@@ -19,7 +19,7 @@
       ]
     },
     {
-      "title": "## Documentation",
+      "title": "## Documentation changes",
       "labels": [
         "docs"
       ]
@@ -33,7 +33,7 @@
       "ignore",
       "chore"
   ],
-  "template": "${{CHANGELOG}}\n**Full Changelog**: ${{RELEASE_DIFF}}",
+  "template": "${{CHANGELOG}}\n\n## Other changes\n\n<details>\n<summary>Show</summary>\n\n${{UNCATEGORIZED}}\n\n</details>\n\n**Full Changelog**: ${{RELEASE_DIFF}}",
   "pr_template": "- ${{TITLE}} by @${{AUTHOR}} in [#${{NUMBER}}](${{URL}})",
   "empty_template": "- no noteworthy changes",
   "label_extractor": [
