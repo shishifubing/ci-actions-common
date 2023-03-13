@@ -7,6 +7,10 @@ concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   type:
     name: Add type labels
@@ -17,7 +21,6 @@ jobs:
         with:
           sync-labels: true
           configuration-path: .github/labeler-pr-triage.yml
-          repo-token: ${{ secrets.CI_GITHUB_TOKEN }}
 
   size:
     name: Add a size label
@@ -26,5 +29,5 @@ jobs:
     steps:
       - uses: CodelyTV/pr-size-labeler@54ef36785e9f4cb5ecf1949cfc9b00dbb621d761 # v1.8.1
         with:
-          GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           message_if_xl: ""
