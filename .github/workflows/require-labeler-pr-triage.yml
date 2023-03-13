@@ -23,8 +23,8 @@ jobs:
       - name: Check if config exists
         id: check
         run: |
-          curl "https://raw.githubusercontent.com/${{ github.repository }}/main/${{ env.CONFIG_PATH }}" \
-            || echo "missing=true" >>"${GITHUB_OUTPUT}" 
+          curl -fL "https://raw.githubusercontent.com/${{ github.repository }}/main/${{ env.CONFIG_PATH }}" \
+            || echo "missing=true" >>"${GITHUB_OUTPUT}"
     
       - name: Add type labels
         if: steps.check.outputs.missing != 'true'
