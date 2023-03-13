@@ -3,9 +3,6 @@ name: require-labeler-pr-triage
 on:
   pull_request_target:
 
-permissions:
-  pull-requests: write
-
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -18,9 +15,9 @@ jobs:
     steps:
       - uses: actions/labeler@ba790c862c380240c6d5e7427be5ace9a05c754b # v4.0.3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
           sync-labels: true
           configuration-path: .github/labeler-pr-triage.yml
+          repo-token: ${{ secrets.CI_GITHUB_TOKEN }}
 
   size:
     name: Add a size label
@@ -29,5 +26,5 @@ jobs:
     steps:
       - uses: CodelyTV/pr-size-labeler@54ef36785e9f4cb5ecf1949cfc9b00dbb621d761 # v1.8.1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
           message_if_xl: ""
